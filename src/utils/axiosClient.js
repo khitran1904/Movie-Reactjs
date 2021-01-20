@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    baseURL: "https://elearning0706.cybersoft.edu.vn/api",
+    baseURL: "https://movie0706.cybersoft.edu.vn/api",
 })
 
 // tự động thêm accessToken nếu cần có

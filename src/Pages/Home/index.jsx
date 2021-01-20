@@ -9,7 +9,7 @@ export default function Home() {
                     <ul className="center__item" >
                         <li><a href="/"  >Lịch Chiếu</a></li>
                         <li><a href="/">Cụm rạp</a></li>
-                        <li><a href="/">Tin Tức</a></li>
+                        <li><a href="#movie">Tin Tức</a></li>
                         <li><a href="/">Ứng dụng</a></li>
                     </ul>
                 </div>
@@ -57,12 +57,15 @@ export default function Home() {
                             <li>Something else here</li>
                         </ul>
                     </div>
-
                 </div>
             </div>
 
             <div className="movie text-center" >
                 <a href="/">Đang chiếu</a>
+                <a href="/">Sắp chiếu</a>
+                <div className="movie__item row" id="movie">
+
+                </div>
             </div>
             <div className="agenda" ></div>
             <div className="news" ></div>
