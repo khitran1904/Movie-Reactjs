@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { getMovieList } from "../../Action/Movie";
 
 export default function Home() {
+    const { movieList } = useSelector((state) => state.movieReducer);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getMovieList());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    console.log(movieList);
+    console.log('movieList');
     return (
         <div>
             <header className="header" >
@@ -13,9 +24,9 @@ export default function Home() {
                         <li><a href="/">Ứng dụng</a></li>
                     </ul>
                 </div>
-                <button className="btn header__btn" >
-                    <i class="fa fa-user-tie"></i> &ensp; Đăng nhập
-                </button>
+                <a href="/login" className="btn header__btn" >
+                    <i class="fa fa-user-tie"></i> &ensp; Đăng nhập / Đăng Kí
+                </a>
             </header>
 
             <div className="carousel__movie" id="" >
@@ -47,9 +58,9 @@ export default function Home() {
                 </div>
                 <div className="carousel__filter">
                     <div className="dropdown">
-                        <a className="btn btn-secondary dropdown-toggle" href="/" role="button" 
+                        <a className="btn btn-secondary dropdown-toggle" href="/" role="button"
                             id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link 
+                            Dropdown link
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li>Action</li>
@@ -63,7 +74,18 @@ export default function Home() {
             <div className="movie text-center" >
                 <a href="/">Đang chiếu</a>
                 <a href="/">Sắp chiếu</a>
-                <div className="movie__item row" id="movie">
+                <div className="movie__item row movie_list" id="movie">
+                    {movieList.map((movie) => {
+                        return (
+                            <div className="card text-left col-sm-4 my-4 mx-">
+                                <img className="card-img-top" width="200px" height="300px" src={movie.hinhAnh} alt="HÌnh ảnh" />
+                                <div className="card-body">
+                                    <h6 className="card-title">{movie.tenPhim}</h6>
+                                    {/* <p className="card-text">{movie.moTa}</p> */}
+                                </div>
+                            </div>
+                        )
+                    })}
 
                 </div>
             </div>

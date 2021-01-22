@@ -1,41 +1,41 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 /* header */
-header{
+header {
   width: 100%;
   height: 70px;
   /* background-color: aqua; */
   position: relative;
 }
-.logo{
+.logo {
   width: 100px;
   height: 80px;
   margin-left: 3%;
   float: left;
 }
-.header__center{
-  margin-left: 35%; 
+.header__center {
+  margin-left: 35%;
 }
-.center__item{
+.center__item {
   text-align: center;
   display: inline;
   /* margin-left: 25%; */
   float: left;
   margin-right: 30px;
 }
-.center__item li{
+.center__item li {
   list-style: none;
   display: inline-block;
   color: black;
@@ -44,7 +44,7 @@ header{
   padding-top: 30px;
 }
 
-.center__item li a{
+.center__item li a {
   color: black;
   text-decoration: none;
   /* font-size: 15px; */
@@ -53,22 +53,22 @@ header{
 .center__item li a:hover {
   color: rgb(231, 36, 36);
 }
-.header__btn{
+.header__btn {
   margin-top: 20px;
   margin-right: 3%;
   position: absolute;
-  right:  3%;
+  right: 3%;
   color: #8d8787;
 }
 
 /* carousel */
-.carousel__movie{
+.carousel__movie {
   position: relative;
 }
-.carousel__customs{
+.carousel__customs {
   bottom: 70px;
 }
-.carousel__filter{
+.carousel__filter {
   background-color: aqua;
   height: 80px;
   margin-top: -40px;
@@ -79,18 +79,98 @@ header{
   border-radius: 5px;
   text-align: center;
   padding-top: 30px;
-  
 }
-
 
 /* movie */
-.movie{
+.movie {
   margin-top: 80px;
 }
-.movie a{
+.movie a {
   font-weight: 400;
   text-decoration: none;
   margin-right: 30px;
   color: black;
   font-size: 20px;
+}
+
+.movie_list {
+  width: 60%;
+  margin-left: 20%;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+/* login */
+.login {
+  background-image: url("../img/film.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-top: 130px;
+  padding-bottom: 145px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login__form {
+  width: 35%;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.719);
+  padding: 50px;
+  color: white;
+}
+
+.login__form input {
+  width: 80%;
+  padding: 13px 10px 13px;
+  font-size: 14px;
+  background: transparent;
+  border: 3px solid #69c920;
+  outline: none;
+  margin-bottom: 26px;
+  color: #fff;
+  font-family: "Quicksand", sans-serif;
+  background: rgba(0, 0, 0, 0.637);
+}
+.login__form form {
+  margin-top: 30px;
+}
+.form__header {
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 50px;
+  color: rgb(229, 243, 149);
+  text-transform: uppercase;
+}
+.login__form a {
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 10px;
+  border: 1px solid rgb(201, 235, 192);
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 18px;
+}
+.login__form a:hover {
+  color: rgb(17, 16, 9);
+  background-color: rgba(255, 255, 255, 0.726);
+
+}
+.login__form p {
+  font-size: 18px;
+}
+.login__form .btn__login {
+  width: 50%;
+  font-size: 16px;
+  padding: 10px 65px;
+  background-color: #537b35;
+  color: #fff;
+  border: none;
+  border-radius: 0px;
+  outline: none;
+  float: none;
+  cursor: pointer;
+}
+.login__form .btn__login:hover {
+  background-color: rgba(255, 255, 255, 0.836);
+  color: #283b19;
 }
