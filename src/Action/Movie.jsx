@@ -3,7 +3,7 @@ import { GET_MOVIE_LIST_FAIL,GET_MOVIE_LIST_REQUEST,GET_MOVIE_LIST_SUCCESS,
 import axiosCustom from "../utils/axiosClient";
 import axios from "axios";
 
-export const getMovieList = () =>{
+const getMovieListAction = () =>{
     return(dispatch)=>{
         dispatch({
             type:GET_MOVIE_LIST_REQUEST
@@ -11,7 +11,7 @@ export const getMovieList = () =>{
         axiosCustom.get("/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=5&soPhanTuTrenTrang=9"
         ).then((result)=>{
             dispatch({
-                type:GET_MOVIE_LIST_SUCCESS,
+                type: GET_MOVIE_LIST_SUCCESS,
                 payload:{data:result.data.items}
             })
         }).catch(error=>{
@@ -25,7 +25,7 @@ export const getMovieList = () =>{
     }
 }
 
-export const login = (values)=>{
+const login = (values)=>{
     return (dispatch)=>{
         dispatch({
             type: LOGIN_REQUEST
@@ -50,3 +50,4 @@ export const login = (values)=>{
     };
 }
 
+export {getMovieListAction,login };

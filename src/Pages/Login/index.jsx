@@ -1,5 +1,6 @@
 import React ,{ useState, useEffect } from 'react'
-
+//style
+import './style.css'
 export default function Login() {
     
     const [taiKhoan,setTaiKhoan] = useState("");
