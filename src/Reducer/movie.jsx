@@ -1,10 +1,18 @@
-import {GET_MOVIE_LIST_FAIL,GET_MOVIE_LIST_REQUEST,GET_MOVIE_LIST_SUCCESS} from '../Constants/Movie';
+import {GET_MOVIE_LIST_FAIL,
+    GET_MOVIE_LIST_REQUEST,
+    GET_MOVIE_LIST_SUCCESS,
+    GET_MOVIE_DETAIL_FAILED,
+    GET_MOVIE_DETAIL_REQUEST,
+    GET_MOVIE_DETAIL_SUCCESS,
+}
+from '../Constants/Movie';
 
 
 const initialState = {
     movieList: [],
     loading: false,
-    error: ""
+    error: "",
+    movieDetail: {}
 };
 const movieReducer = (state = initialState, action) => {
 
@@ -16,6 +24,12 @@ const movieReducer = (state = initialState, action) => {
         case GET_MOVIE_LIST_FAIL:
             return{...state, error:action.payload.error};
         
+        case GET_MOVIE_DETAIL_REQUEST:
+            return {...state, loading:true};
+        case GET_MOVIE_DETAIL_SUCCESS:
+            return {...state, loading:false, movieDetail: action.payload.data};
+        case GET_MOVIE_DETAIL_FAILED:
+            return {...state, error: action.payload.error};
         default:
             return state;
     }
