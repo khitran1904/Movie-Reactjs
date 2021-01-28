@@ -11,7 +11,7 @@ from '../Constants/Movie';
 const initialState = {
     movieList: [],
     loading: false,
-    error: "",
+    error: null,
     movieDetail: {}
 };
 const movieReducer = (state = initialState, action) => {

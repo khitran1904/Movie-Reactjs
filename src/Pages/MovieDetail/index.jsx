@@ -12,10 +12,10 @@ export default function MovieDetail(props) {
   });
   return (
     <div>
-      {console.log(movieDetail)}
+      Movie Detail Movie Detail
       <img
         src={movieDetail.hinhAnh}
-        style={{ width: "100px", height: "100px" }}
+        style={{ width: "200px", height: "200px" }}
         alt=""
       />
     </div>

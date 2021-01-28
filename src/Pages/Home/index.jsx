@@ -16,8 +16,6 @@ export default function Home() {
     }, [])
     return (
         <div>
-            {/* {console.log(movieList)} */}
-            {/* <Header/> */}
             <div className="carousel__movie" id="" >
                 <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
                     <ol className="carousel-indicators carousel__customs">

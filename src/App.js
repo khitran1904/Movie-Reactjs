@@ -11,16 +11,12 @@ import "./Style/App.css";
 
 function App() {
   return (
-    // <div>
-    //   <Home></Home>
-    // </div>
     <BrowserRouter>
       <Switch>
         <Route exact path={["/", "/movie/:movieId"]}>
           <MainLayout>
             <Switch>
               <Route exact path="/" component={Home} />
-              {/* <Route exact path="/login" component={Login} /> */}
               <Route
                 exact
                 path="/movie/:movieId"
