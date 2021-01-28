@@ -4,11 +4,11 @@ export default function Login() {
     
     const [taiKhoan,setTaiKhoan] = useState("");
     const [matKhau,setMatKhau] = useState("");
-    const handleChangeTK = (evt )=>{
-        const tk = evt.target;
-        console.log("tk");
-        // setTaiKhoan(tk);
-        
+
+    function handleChangeTK (evt)  {
+        const {name,value} = evt.target;
+        console.log(value);
+        setTaiKhoan(value);
     }
     const handleChangeMK = (evt )=>{
         // setTaiKhoan(evt.target);
