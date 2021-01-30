@@ -5,7 +5,7 @@ export default class MainLayout extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header/>
+                <Header />
                 {this.props.children}
             </React.Fragment>
         )

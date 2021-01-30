@@ -1,34 +1,21 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { getMovieList } from "../../Action/Movie";
-
+import { getMovieListAction } from "../../Action/Movie";
+import {Link} from 'react-router-dom';
+//styles
+import './style.css'
+//components
+// import Header from '../../Components/Header';
 export default function Home() {
-    const { movieList } = useSelector((state) => state.movieReducer);
-
+    const { movieList } = useSelector((state) => state.movieReducer);       
     const dispatch = useDispatch();
+
+    // tuong duong voi componentDidMount, chi chay 1 lan sau render 
     useEffect(() => {
-        dispatch(getMovieList());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        dispatch(getMovieListAction());
     }, [])
-    console.log(movieList);
-    console.log('movieList');
     return (
         <div>
-            <header className="header" >
-                <a href="/"><img className="logo" src="./img/logo.jpg" alt="" /></a>
-                <div className="header__center" >
-                    <ul className="center__item" >
-                        <li><a href="/"  >Lịch Chiếu</a></li>
-                        <li><a href="/">Cụm rạp</a></li>
-                        <li><a href="#movie">Tin Tức</a></li>
-                        <li><a href="/">Ứng dụng</a></li>
-                    </ul>
-                </div>
-                <a href="/login" className="btn header__btn" >
-                    <i class="fa fa-user-tie"></i> &ensp; Đăng nhập / Đăng Kí
-                </a>
-            </header>
-
             <div className="carousel__movie" id="" >
                 <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
                     <ol className="carousel-indicators carousel__customs">
@@ -77,10 +64,14 @@ export default function Home() {
                 <div className="movie__item row movie_list" id="movie">
                     {movieList.map((movie) => {
                         return (
-                            <div className="card text-left col-sm-4 my-4 mx-">
+                            <div key={movie.maPhim} className="card text-left col-sm-4 my-4 mx-">
                                 <img className="card-img-top" width="200px" height="300px" src={movie.hinhAnh} alt="HÌnh ảnh" />
                                 <div className="card-body">
                                     <h6 className="card-title">{movie.tenPhim}</h6>
+                                    {/* <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}> */}
+                                    <Link to={`/movie/${movie.maPhim}`}>
+                                    <button className="btn btn-success">Detail</button>
+                                    </Link>
                                     {/* <p className="card-text">{movie.moTa}</p> */}
                                 </div>
                             </div>

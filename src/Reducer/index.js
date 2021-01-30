@@ -1,9 +1,9 @@
-import {combineReducers } from "redux";
+import { combineReducers } from "redux";
 import movieReducer from "./movie";
-
-
+import authReducer from "./Auth";
 const rootReducer = combineReducers({
-    movieReducer:movieReducer,
+  movieReducer,
+  authReducer,
 });
 
 export default rootReducer;

@@ -1,0 +1,44 @@
+/* carousel */
+
+.carousel__movie {
+    position: relative;
+}
+
+.carousel__customs {
+    bottom: 70px;
+}
+
+.carousel__filter {
+    background-color: aqua;
+    height: 80px;
+    margin-top: -40px;
+    position: absolute;
+    bottom: -50px;
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+/* movie */
+
+.movie {
+    margin-top: 80px;
+}
+
+.movie a {
+    font-weight: 400;
+    text-decoration: none;
+    margin-right: 30px;
+    color: black;
+    font-size: 20px;
+}
+
+.movie_list {
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 30px;
+}
