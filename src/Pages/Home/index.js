@@ -120,7 +120,6 @@ export default function Home() {
                 <div className="card-body">
                   <h6 className="card-title">{movie.tenPhim}</h6>
                   <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}>
-                    {/* <Link to={`/movie/${movie.maPhim}`}> */}
                     <button className="btn btn-success">Detail</button>
                   </Link>
                   {/* <p className="card-text">{movie.moTa}</p> */}
