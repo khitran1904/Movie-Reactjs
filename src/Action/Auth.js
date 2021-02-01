@@ -28,7 +28,7 @@ const loginAction = (values) => {
         dispatch({
           type: AUTH_LOGIN_FAILED,
           payload: {
-            error: error.response.data,
+            error: error.response,
           },
         });
       });

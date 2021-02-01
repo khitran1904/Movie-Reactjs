@@ -7,6 +7,7 @@ import { createStore,applyMiddleware,compose } from "redux";
 import thunk from "redux-thunk";
 import {  Provider} from "react-redux";
 import  rootReducer from "./Reducer";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const enhanced = compose(
   applyMiddleware(thunk),

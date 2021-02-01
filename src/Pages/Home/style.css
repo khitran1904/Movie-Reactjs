@@ -9,7 +9,7 @@
 }
 
 .carousel__filter {
-    background-color: aqua;
+    background-color: white;
     height: 80px;
     margin-top: -40px;
     position: absolute;
@@ -19,6 +19,26 @@
     border-radius: 5px;
     text-align: center;
     padding-top: 30px;
+    /* border: 1px solid black; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
+    display: flex;
+    justify-content: space-around; 
+}
+.carousel__filter a{
+    margin-bottom: auto;
+    font-size: 18px;
+}
+
+/* dropdown */
+
+.dropdown{
+    float: left;
+    
+}
+.dropdown select{
+    padding: 10px;
+    border: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.267);
 }
 
 /* movie */
