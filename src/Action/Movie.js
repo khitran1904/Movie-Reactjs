@@ -7,16 +7,18 @@ import {
   GET_MOVIE_DETAIL_SUCCESS,
 } from "../Constants/Movie";
 // import axiosCustom from "../utils/axiosClient";
-import  axios from "axios";
+import axios from "axios";
 
 const getMovieListAction = () => {
   return (dispatch) => {
     dispatch({
       type: GET_MOVIE_LIST_REQUEST,
     });
-    axios.get(
+    axios
+      .get(
         "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=2&soPhanTuTrenTrang=9"
-      ).then((result) => {
+      )
+      .then((result) => {
         dispatch({
           type: GET_MOVIE_LIST_SUCCESS,
           payload: { data: result.data.items },
@@ -33,13 +35,14 @@ const getMovieListAction = () => {
   };
 };
 
-const getMovieDetailAction = (movieId) => {
+const getMovieDetailAction = (movieParam) => {
+  let movieId = movieParam.split("-");
   return (dispatch, getState) => {
     dispatch({
       type: GET_MOVIE_DETAIL_REQUEST,
     });
-    axios
-      .get(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`)
+    axiosCustom
+      .get(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId[0]}`)
       .then((result) => {
         dispatch({
           type: GET_MOVIE_DETAIL_SUCCESS,
