@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieDetailAction } from "../../Action/Movie";
+import Footer from "../../Components/Footer";
 export default function MovieDetail(props) {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -12,12 +13,7 @@ export default function MovieDetail(props) {
   });
   return (
     <div>
-      Movie Detail Movie Detail
-      <img
-        src={movieDetail.hinhAnh}
-        style={{ width: "200px", height: "200px" }}
-        alt=""
-      />
+      <Footer />
     </div>
   );
 }

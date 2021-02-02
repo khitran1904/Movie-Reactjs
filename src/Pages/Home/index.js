@@ -1,18 +1,24 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getMovieListAction } from "../../Action/Movie";
+import { getListTheater } from "../../Action/Theater";
 import { Link } from "react-router-dom";
 //styles
 import "./style.css";
 //components
 // import Header from '../../Components/Header';
+
 export default function Home() {
   const { movieList } = useSelector((state) => state.movieReducer);
+  const { theaterList } = useSelector((state) => state.theaterReducer);
   const dispatch = useDispatch();
 
-  // tuong duong voi componentDidMount, chi chay 1 lan sau render
+  // tương Đương voi componentDidMount, chi chạy 1 lan sau render
   useEffect(() => {
     dispatch(getMovieListAction());
+    dispatch(getListTheater());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>
@@ -81,25 +87,48 @@ export default function Home() {
         </div>
         <div className="carousel__filter">
           <div className="dropdown">
-            <a
-              className="btn btn-secondary dropdown-toggle"
-              href="/"
-              role="button"
-              id="dropdownMenuLink"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Dropdown link
-            </a>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <li>Action</li>
-              <li>Another action</li>
-              <li>Something else here</li>
-            </ul>
+            <form action="">
+              <select name="cars" id="cars">
+                <option value="">Chọn rạp</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+              </select>
+            </form>
           </div>
+          <div className="dropdown">
+            <form action="">
+              <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+              </select>
+            </form>
+          </div>
+          <div className="dropdown">
+            <form action="">
+              <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+              </select>
+            </form>
+          </div>
+          <div className="dropdown">
+            <form action="">
+              <select name="cars" id="cars">
+                <option value="">Chọn rạp</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+              </select>
+            </form>
+          </div>
+          <a className="btn btn-success">Mua vé</a>
         </div>
       </div>
-
       <div className="movie text-center">
         <a href="/">Đang chiếu</a>
         <a href="/">Sắp chiếu</a>
@@ -119,6 +148,7 @@ export default function Home() {
                 />
                 <div className="card-body">
                   <h6 className="card-title">{movie.tenPhim}</h6>
+                  {/* <Link to={`/movie/${movie.maPhim}`}> */}
                   <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}>
                     <button className="btn btn-success">Detail</button>
                   </Link>

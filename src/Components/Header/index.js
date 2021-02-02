@@ -1,6 +1,10 @@
 import React from "react";
 import "./style.css";
 export default function Header() {
+  let taiKhoan = "";
+  if (localStorage.getItem("user") !== null) {
+    taiKhoan = JSON.parse(localStorage.getItem("user")).taiKhoan;
+  }
   return (
     <header className="header">
       <a href="/">
@@ -22,9 +26,15 @@ export default function Header() {
           </li>
         </ul>
       </div>
-      <a href="/login" className="btn header__btn">
-        <i className="fa fa-user-tie"></i> &ensp; Đăng nhập / Đăng Kí
-      </a>
+      {taiKhoan === "" ? (
+        <a href="/login" className="btn header__btn ">
+          <i className="fa fa-user-tie"></i> &ensp; Đăng nhập / Đăng Kí
+        </a>
+      ) : (
+        <a href="/" className="btn header__btn">
+          <i className="fa fa-user-tie"></i> &ensp; {taiKhoan}
+        </a>
+      )}
     </header>
   );
 }
