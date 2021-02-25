@@ -3,17 +3,16 @@ import {
   GET_THEATER_LIST_REQUEST,
   GET_THEATER_LIST_SUCCESS,
 } from "../Constants/Theater";
-
 import axios from "axios";
 
-const getListTheater = () => {
+const getListTheater = (maPhim) => {
   return (dispatch) => {
     dispatch({
       type: GET_THEATER_LIST_REQUEST,
     });
     axios
       .get(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinHeThongRap"
+        `https://movie0706.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`
       )
       .then((result) => {
         dispatch({

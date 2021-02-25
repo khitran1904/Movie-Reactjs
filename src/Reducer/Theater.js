@@ -15,7 +15,12 @@ const theaterReducer = (state = initialState, action) => {
     case GET_THEATER_LIST_REQUEST:
       return { ...state, loading: true };
     case GET_THEATER_LIST_SUCCESS:
-      return { ...state, loading: false, theaterList: action.payload.data };
+      console.log(action.payload.data);
+      return {
+        ...state,
+        loading: false,
+        theaterList: action.payload.data.heThongRapChieu,
+      };
     case GET_THEATER_LIST_FAIL:
       return { ...state, error: action.payload.error };
     default:
