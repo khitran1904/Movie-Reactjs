@@ -13,16 +13,17 @@ import './style.css'
 
 export default function Home() {
     const { movieList } = useSelector((state) => state.movieReducer);
-    const {theaterList} = useSelector((state)=>state.theaterReducer)
     const dispatch = useDispatch();
-    
 
+    
     // tương Đương voi componentDidMount, chi chạy 1 lan sau render 
     useEffect(() => {
         dispatch(getMovieListAction());
         dispatch(getListTheater());
+        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
     return (
         <div>
             <div className="carousel__movie" id="" >
@@ -55,21 +56,15 @@ export default function Home() {
                 <div className="carousel__filter">
                     <div className="dropdown">
                         <form action="">
-                            <select name="cars" id="cars">
-                                <option value="">Chọn rạp</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select>
-                        </form>
-                    </div>
-                    <div className="dropdown">
-                        <form action="">
-                            <select name="cars" id="cars">
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
+                            <select name="movie1" id="movie" >
+                                <option value="">Chọn phim</option>
+                                {
+                                    movieList.map((movie)=>{
+                                        return (
+                                            <option value={movie.maPhim}>{movie.tenPhim}</option>
+                                        )
+                                    })
+                                }
                             </select>
                         </form>
                     </div>

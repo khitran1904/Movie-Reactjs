@@ -4,8 +4,9 @@ import {
   AUTH_LOGIN_FAILED,
 } from "../Constants/Auth";
 import axios from "axios";
+
 const loginAction = (values) => {
-  console.log(values);
+  // console.log(values);
   return (dispatch, getState) => {
     dispatch({
       type: AUTH_LOGIN_REQ,
