@@ -6,7 +6,7 @@ import {
   GET_MOVIE_DETAIL_REQUEST,
   GET_MOVIE_DETAIL_SUCCESS,
 } from "../Constants/Movie";
-// import axiosCustom from "../utils/axiosClient";
+import axiosCustom from "../utils/axiosClient";
 import axios from "axios";
 
 const getMovieListAction = () => {
