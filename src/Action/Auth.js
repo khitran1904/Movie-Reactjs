@@ -6,7 +6,6 @@ import {
 import axios from "axios";
 
 const loginAction = (values) => {
-  // console.log(values);
   return (dispatch, getState) => {
     dispatch({
       type: AUTH_LOGIN_REQ,

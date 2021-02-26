@@ -33,13 +33,14 @@ const getMovieListAction = () => {
   };
 };
 
-const getMovieDetailAction = (movieId) => {
+const getMovieDetailAction = (movieParam) => {
+  let movieId = movieParam.split("-");
   return (dispatch, getState) => {
     dispatch({
       type: GET_MOVIE_DETAIL_REQUEST,
     });
-    axios
-      .get(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`)
+    axiosCustom
+      .get(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId[0]}`)
       .then((result) => {
         dispatch({
           type: GET_MOVIE_DETAIL_SUCCESS,
