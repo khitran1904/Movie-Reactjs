@@ -7,6 +7,7 @@ import "./style.css";
 import { loginAction } from "../../Action/Auth";
 export default function Login() {
   const dispatch = useDispatch();
+
   const { currentUser, error, loading } = useSelector(
     (state) => state.authReducer
   );
