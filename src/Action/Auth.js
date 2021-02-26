@@ -4,6 +4,7 @@ import {
   AUTH_LOGIN_FAILED,
 } from "../Constants/Auth";
 import axios from "axios";
+
 const loginAction = (values) => {
   return (dispatch, getState) => {
     dispatch({
@@ -27,7 +28,7 @@ const loginAction = (values) => {
         dispatch({
           type: AUTH_LOGIN_FAILED,
           payload: {
-            error: error.response.data,
+            error: error.response,
           },
         });
       });

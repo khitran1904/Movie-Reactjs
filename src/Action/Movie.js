@@ -7,15 +7,16 @@ import {
   GET_MOVIE_DETAIL_SUCCESS,
 } from "../Constants/Movie";
 import axiosCustom from "../utils/axiosClient";
+import axios from "axios";
 
 const getMovieListAction = () => {
   return (dispatch) => {
     dispatch({
       type: GET_MOVIE_LIST_REQUEST,
     });
-    axiosCustom
+    axios
       .get(
-        "/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=5&soPhanTuTrenTrang=9"
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=2&soPhanTuTrenTrang=9"
       )
       .then((result) => {
         dispatch({
