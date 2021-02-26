@@ -100,13 +100,8 @@ export default function Home() {
       };
     });
   };
-  const handleClick = (e) => {
-    var boo = !!selectMovieToBook;
-    console.log(boo);
-  };
   return (
     <div>
-      {console.log(selectMovieToBook)}
       <div className="carousel__movie" id="">
         <div
           id="carouselExampleIndicators"
@@ -215,9 +210,26 @@ export default function Home() {
               </select>
             </form>
           </div>
-          <a onClick={handleClick} className="btn btn-success">
-            Mua vé
-          </a>
+          <Link
+            to={{
+              pathname: "/checkout",
+              state: { bookMovie: selectMovieToBook },
+            }}
+          >
+            <button
+              disabled={
+                selectMovieToBook.movie &&
+                selectMovieToBook.theater &&
+                selectMovieToBook.date &&
+                selectMovieToBook.time
+                  ? false
+                  : true
+              }
+              className="btn btn-success"
+            >
+              Mua vé
+            </button>
+          </Link>
         </div>
       </div>
       <div className="movie text-center">
