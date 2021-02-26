@@ -10,9 +10,14 @@ import "./style.css";
 export default function Home() {
   const { movieList } = useSelector((state) => state.movieReducer);
   const { theaterList } = useSelector((state) => state.theaterReducer);
-  const [movieFilter, setFilterMovie] = useState(null);
-  const [theaterFilter, setTheaterFilter] = useState(null);
+  const [selectMovieToBook, setSelectMovieToBook] = useState({
+    movie: "",
+    theater: "",
+    date: "",
+    time: "",
+  });
   const isMounted = useRef(true);
+  var filterTimeList = [];
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMovieListAction());
@@ -22,10 +27,14 @@ export default function Home() {
     if (isMounted.current) {
       isMounted.current = false;
     } else {
-      dispatch(getListTheater(movieFilter));
+      dispatch(getListTheater(selectMovieToBook.movie));
     }
-  }, [movieFilter]);
+  }, [selectMovieToBook.movie]);
 
+  // const formatDate = (date) => {
+  //   const dateObj = new Date(date + "T00:00:00");
+  //   return new Intl.DateTimeFormat("en-US").format(dateObj);
+  // };
   const handleRenderMovieOption = () => {
     return movieList.map((movie) => (
       <option key={movie.maPhim} value={movie.maPhim}>
@@ -34,47 +43,68 @@ export default function Home() {
     ));
   };
 
-  const selectMovieFilter = (event) => {
-    setFilterMovie(event.target.value);
-  };
-
   const handleRenderTheaterOption = () => {
-    return movieFilter ? (
-      theaterList.map((theaterGroup) =>
-        theaterGroup.cumRapChieu.map((theater) => (
-          <option key={theater.maCumRap}>
-            {/* {console.log(theaterGroup)}
-            {console.log(theater)} */}
-            {theater.tenCumRap}
-          </option>
-        ))
-      )
-    ) : (
-      <option>Vui long chon phim</option>
+    return theaterList.map((theaterGroup) =>
+      theaterGroup.cumRapChieu.map((theater) => (
+        <option value={theater.maCumRap} key={theater.maCumRap}>
+          {theater.tenCumRap}
+        </option>
+      ))
     );
   };
-
-  const selectTheaterFilter = (event) => {};
 
   const handleRenderDateOption = () => {
-    return movieFilter ? (
-      theaterList.map((theaterGroup) =>
-        theaterGroup.cumRapChieu.map((theater) =>
-          theater.lichChieuPhim.map((movieTime) => (
-            <option key={movieTime.maLichChieu}>
-              {movieTime.ngayChieuGioChieu}
-            </option>
-          ))
-        )
-      )
-    ) : (
-      <option>Vui long chon phim va rap</option>
-    );
+    theaterList.map((theaterGroup) => {
+      theaterGroup.cumRapChieu.map((theater) => {
+        if (theater.maCumRap === selectMovieToBook.theater) {
+          theater.lichChieuPhim.map((movieTime) => {
+            filterTimeList.push(movieTime.ngayChieuGioChieu.split("T")[0]);
+          });
+        }
+      });
+    });
+
+    filterTimeList = filterTimeList.filter((item, index) => {
+      return filterTimeList.indexOf(item) === index;
+    });
+    return filterTimeList.map((time) => <option key={time}>{time}</option>);
   };
 
-  const selectDateFilter = () => {};
+  const handleRenderTimeOption = () => {
+    return theaterList.map((theaterGroup) => {
+      return theaterGroup.cumRapChieu.map((theater) => {
+        if (theater.maCumRap === selectMovieToBook.theater) {
+          return theater.lichChieuPhim.map((movieTime) => {
+            if (
+              movieTime.ngayChieuGioChieu.split("T")[0] ===
+              selectMovieToBook.date
+            ) {
+              return (
+                <option key={movieTime.ngayChieuGioChieu.split("T")[1]}>
+                  {movieTime.ngayChieuGioChieu.split("T")[1]}
+                </option>
+              );
+            }
+          });
+        }
+      });
+    });
+  };
+  const handleChange = (e) => {
+    setSelectMovieToBook((currentValue) => {
+      return {
+        ...currentValue,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+  const handleClick = (e) => {
+    var boo = !!selectMovieToBook;
+    console.log(boo);
+  };
   return (
     <div>
+      {console.log(selectMovieToBook)}
       <div className="carousel__movie" id="">
         <div
           id="carouselExampleIndicators"
@@ -140,38 +170,52 @@ export default function Home() {
         </div>
         <div className="carousel__filter">
           <div className="dropdown">
-            <select onChange={selectMovieFilter}>
+            <select name="movie" onChange={handleChange}>
               <option>Phim</option>
               {handleRenderMovieOption()}
             </select>
           </div>
           <div className="dropdown">
             <form action="">
-              <select onChange={selectTheaterFilter}>
+              <select name="theater" onChange={handleChange}>
                 <option>Rap</option>
-                {handleRenderTheaterOption()}
+                {selectMovieToBook.movie ? (
+                  handleRenderTheaterOption()
+                ) : (
+                  <option>Vui long chon phim</option>
+                )}
               </select>
             </form>
           </div>
           <div className="dropdown">
             <form action="">
-              <select onChange={selectDateFilter}>
+              <select name="date" onChange={handleChange}>
                 <option>Ngay xem</option>
-                {handleRenderDateOption()}
+                {selectMovieToBook.movie && selectMovieToBook.theater ? (
+                  handleRenderDateOption()
+                ) : (
+                  <option>Vui long chon phim va rap</option>
+                )}
               </select>
             </form>
           </div>
           <div className="dropdown">
             <form action="">
-              <select>
-                <option value="">Chọn rạp</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+              <select name="time" onChange={handleChange}>
+                <option value="">Suat</option>
+                {selectMovieToBook.movie &&
+                selectMovieToBook.theater &&
+                selectMovieToBook.date ? (
+                  handleRenderTimeOption()
+                ) : (
+                  <option>Vui long chon phim, rap va ngay xem</option>
+                )}
               </select>
             </form>
           </div>
-          <a className="btn btn-success">Mua vé</a>
+          <a onClick={handleClick} className="btn btn-success">
+            Mua vé
+          </a>
         </div>
       </div>
       <div className="movie text-center">
@@ -193,11 +237,9 @@ export default function Home() {
                 />
                 <div className="card-body">
                   <h6 className="card-title">{movie.tenPhim}</h6>
-                  {/* <Link to={`/movie/${movie.maPhim}`}> */}
                   <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}>
                     <button className="btn btn-success">Detail</button>
                   </Link>
-                  {/* <p className="card-text">{movie.moTa}</p> */}
                 </div>
               </div>
             );
@@ -210,137 +252,3 @@ export default function Home() {
     </div>
   );
 }
-
-const object = {
-  heThongRapChieu: [
-    {
-      cumRapChieu: [
-        {
-          lichChieuPhim: [
-            {
-              maLichChieu: "40739",
-              maRap: "467",
-              tenRap: "Rạp 7",
-              ngayChieuGioChieu: "2020-11-14T06:33:59",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-            {
-              maLichChieu: "40740",
-              maRap: "463",
-              tenRap: "Rạp 3",
-              ngayChieuGioChieu: "2020-11-14T06:34:20",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-          ],
-          maCumRap: "bhd-star-cineplex-bitexco",
-          tenCumRap: "BHD Star Cineplex - Bitexco",
-          hinhAnh: null,
-        },
-        {
-          lichChieuPhim: [
-            {
-              maLichChieu: "40775",
-              maRap: "460",
-              tenRap: "Rạp 10",
-              ngayChieuGioChieu: "2019-01-02T12:00:00",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-            {
-              maLichChieu: "40783",
-              maRap: "459",
-              tenRap: "Rạp 9",
-              ngayChieuGioChieu: "2020-11-01T11:40:00",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-            {
-              maLichChieu: "40792",
-              maRap: "451",
-              tenRap: "Rạp 1",
-              ngayChieuGioChieu: "2019-01-02T12:00:00",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-          ],
-          maCumRap: "bhd-star-cineplex-3-2",
-          tenCumRap: "BHD Star Cineplex - 3/2",
-          hinhAnh: null,
-        },
-      ],
-      maHeThongRap: "BHDStar",
-      tenHeThongRap: "BHD Star Cineplex",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/bhd-star-cineplex.png",
-    },
-    {
-      cumRapChieu: [
-        {
-          lichChieuPhim: [
-            {
-              maLichChieu: "40712",
-              maRap: "587",
-              tenRap: "Rạp 7",
-              ngayChieuGioChieu: "2020-11-13T11:05:08",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-          ],
-          maCumRap: "cgv-hung-vuong-plaza",
-          tenCumRap: "CGV - Hùng Vương Plaza",
-          hinhAnh: null,
-        },
-        {
-          lichChieuPhim: [
-            {
-              maLichChieu: "41220",
-              maRap: "511",
-              tenRap: "Rạp 1",
-              ngayChieuGioChieu: "2020-11-01T06:45:00",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-          ],
-          maCumRap: "cgv-aeon-binh-tan",
-          tenCumRap: "CGV - Aeon Bình Tân",
-          hinhAnh: null,
-        },
-      ],
-      maHeThongRap: "CGV",
-      tenHeThongRap: "cgv",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/cgv.png",
-    },
-    {
-      cumRapChieu: [
-        {
-          lichChieuPhim: [
-            {
-              maLichChieu: "41221",
-              maRap: "722",
-              tenRap: "Rạp 2",
-              ngayChieuGioChieu: "2019-12-01T07:00:00",
-              giaVe: 90000,
-              thoiLuong: 120,
-            },
-          ],
-          maCumRap: "cns-hai-ba-trung",
-          tenCumRap: "CNS - Hai Bà Trưng",
-          hinhAnh: null,
-        },
-      ],
-      maHeThongRap: "CineStar",
-      tenHeThongRap: "CineStar",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/cinestar.png",
-    },
-  ],
-  maPhim: 4517,
-  tenPhim: "day la gap bơ",
-  biDanh: "day-la-gap-bo",
-  trailer: "https://www.youtube.com/embed/dyuUk_gMRkc",
-  hinhAnh: "http://movie0706.cybersoft.edu.vn/hinhanh/my-shunshine_gp01.jpg",
-  moTa: "okkkkkkkkkkkkkp",
-  maNhom: "GP01",
-  ngayKhoiChieu: "2020-10-10T00:00:00",
-  danhGia: 10,
-};
