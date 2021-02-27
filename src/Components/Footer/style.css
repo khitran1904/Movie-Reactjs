@@ -1,0 +1,112 @@
+.coWorker {
+    padding: 20px 0px 0px;
+    background-image: url("https://www.bhdstar.vn/wp-content/themes/bhd/assets/images/bg-grid.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    background-size: auto;
+    background-repeat: unset;
+}
+
+.coWorker .coWorker__content {
+    width: 940px;
+    margin: auto;
+}
+
+.coWorker .coWorker__content a {
+    text-decoration: none;
+    color: #949494;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.coWorker .coWorker__content a img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    color: #949494;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.coWorker .coWorker__content p {
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.coWorker .coWorker__content .coWorker__left a {
+    display: block;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.coWorker .coWorker__content .coWorker__left a:hover {
+    color: white;
+}
+
+.coWorker .coWorker__content .coWorker__middle .icon-selection img {
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+.coWorker .coWorker__content .coWorker__middle .icon-selection img:hover {
+    opacity: 0.7;
+}
+
+.coWorker .coWorker__content .coWorker__right .col-md-6 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.coWorker .coWorker__content .coWorker__afterCredit {
+    padding: 30px 0px 0px;
+    border-top: 1px solid #949494;
+}
+
+.coWorker .coWorker__content .coWorker__afterCredit h4 {
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.coWorker .coWorker__content .coWorker__afterCredit p {
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+.coWorker .coWorker__content .coWorker__afterCredit p a {
+    color: red;
+}
+
+.coWorker .coWorker__content .coWorker__afterCredit .ziOnIcon {
+    width: 80px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.coWorker .coWorker__content .coWorker__afterCredit .vcdnIcon {
+    width: 120px;
+}
+
+@media screen and (max-width: 1010px) {
+    .coWorker .coWorker__content {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .coWorker .coWorker__content {
+        text-align: center;
+    }
+}

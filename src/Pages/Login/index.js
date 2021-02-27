@@ -11,6 +11,7 @@ import { loginAction, signUpAction, closeAction } from "../../Action/Auth";
 
 export default function Login() {
   const dispatch = useDispatch();
+
   const { currentUser, error, loading } = useSelector(
     (state) => state.authReducer
   );
