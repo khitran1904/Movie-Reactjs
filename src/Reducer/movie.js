@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import {GET_MOVIE_LIST_FAIL,
     GET_MOVIE_LIST_REQUEST,
     GET_MOVIE_LIST_SUCCESS,
