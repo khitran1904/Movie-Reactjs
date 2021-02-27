@@ -44,10 +44,10 @@ export default function Login() {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
 
-  const toggleClose = () =>{
+  const toggleClose = () => {
     setModal(false);
     dispatch(closeAction());
-    }
+  }
 
   if (currentUser) {
     return <Redirect to="/" />;
@@ -99,11 +99,11 @@ export default function Login() {
               <form className="signUp mx-3 ">
                 <p>
                   <label for="hoTen" class="floatLabel">Họ Tên</label>
-                  <input id="hoTen" name="hoTen" className="col-11 m-1" onChange={handleUser}  />
+                  <input id="hoTen" name="hoTen" className="col-11 m-1" onChange={handleUser} />
                 </p>
                 <p>
                   <label for="taiKhoan" class="floatLabel">Tài Khoản</label>
-                  <input id="taiKhoan" name="taiKhoan" className="col-11 m-1" onChange={handleUser}  />
+                  <input id="taiKhoan" name="taiKhoan" className="col-11 m-1" onChange={handleUser} />
                 </p>
                 <p>
                   <label for="matKhau" class="floatLabel">Mật Khẩu</label>
@@ -118,11 +118,18 @@ export default function Login() {
                   <input id="soDt" name="soDt" className="col-11 m-1" onChange={handleUser} placeholder="" />
                 </p>
               </form>
-              <span id="notify" className="text-danger text-center m-4 fs-5" >{errorSignUp}</span>
+              {/* <span id="notify" className="text-danger text-center m-4 fs-5" >{errorSignUp ? errorSignUp : "Đăng kí tài khoản thành công"}</span> */}
+              {
+
+                errorSignUp ?
+                  <span id="notify" className="text-danger text-center m-4 fs-5" >{errorSignUp}</span>
+                  :
+                  <span id="notify" className="text-success text-center m-4 fs-5" > Đăng kí tài khoản thành công !</span>
+              }
             </ModalBody>
             <ModalFooter className="container">
               <Button color="primary" onClick={() => dispatch(signUpAction(user))} disabled={loadingSignUp} >Đăng Kí</Button>
-              <Button color="danger" onClick={ toggleClose}>Thoát</Button>
+              <Button color="danger" onClick={toggleClose}>Thoát</Button>
             </ModalFooter>
           </Modal>
         </div>
@@ -130,3 +137,4 @@ export default function Login() {
     </div>
   );
 }
+
