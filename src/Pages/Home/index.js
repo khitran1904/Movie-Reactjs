@@ -21,7 +21,6 @@ export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMovieListAction());
-    dispatch(getListTheater());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
