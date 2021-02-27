@@ -76,3 +76,50 @@
     background-color: rgba(255, 255, 255, 0.836);
     color: #283b19;
 }
+
+.signUp input{
+    border: 1px solid gray;
+    /* border-top: none; */
+    border-radius: 2px;
+    align-items: center;
+}
+
+p {
+    margin: 0 0 1.2em 0;
+    position: relative;
+}
+p input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+    padding:7px;
+    border: 1px solid #999;
+    color:  rgb(68, 67, 67);
+}
+p label{
+    position: absolute;
+    left: 18px;
+    top: 12px;
+    color: #999;
+    font-size: 16px;
+    display: inline-block;
+    /* padding: 4px 10px; */
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 400;
+    background-color: rgba(255,255,255,0);
+    
+}
+
+.floatLabel{
+    top: -15px;
+    background-color: rgb(255, 255, 255);
+    font-size: 14px;
+    }
+
+.header__SignUp{
+    text-align: center;
+    padding-left: 38%;
+    color: #69c920;
+}
