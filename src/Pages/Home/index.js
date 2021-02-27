@@ -14,13 +14,11 @@ import './style.css'
 export default function Home() {
     const { movieList } = useSelector((state) => state.movieReducer);
     const dispatch = useDispatch();
-
     
     // tương Đương voi componentDidMount, chi chạy 1 lan sau render 
     useEffect(() => {
         dispatch(getMovieListAction());
         dispatch(getListTheater());
-        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
