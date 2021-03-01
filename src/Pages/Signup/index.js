@@ -27,9 +27,20 @@ export default function Signup() {
 
   const toggle = () => {
     setModal(!modal);
-    dispatch(closeAction());
+    // dispatch(closeAction());
   };
 
+  const toggleClose = (isDirty, isValid) => {
+    if (isDirty && !isValid) {
+      var r = window.confirm(
+        "Ban co chac ban muon thoat khong. Neu thoat cac o thong tin se bi mat"
+      );
+      if (r) {
+        dispatch(closeAction());
+      }
+    }
+    setModal(!modal);
+  };
   const validationSchema = Yup.object({
     taiKhoan: Yup.string()
       .required("Username is required")
@@ -56,7 +67,7 @@ export default function Signup() {
   if (userSignUp) {
     <Redirect to="/" />;
   }
-
+  const dirty = {};
   return (
     <div>
       <p>
@@ -177,7 +188,12 @@ export default function Signup() {
                   {loadingSignUp && (
                     <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                   )}
-                  <Button color="danger" onClick={toggle}>
+                  <Button
+                    color="danger"
+                    onClick={() => {
+                      toggleClose(dirty, isValid);
+                    }}
+                  >
                     Thoát
                   </Button>
                   {errorSignUp && (
