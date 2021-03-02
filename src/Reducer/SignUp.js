@@ -2,13 +2,18 @@ import {
   SIGN_UP_FAIL,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
-  SIGN_UP_RESET,
+  SIGN_UP_ALERT_RESET,
 } from "../Constants/SignUp";
 
+const userSignUp = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  : null;
+
 let initialState = {
-  userSignUp: "",
+  userSignUp,
   loadingSignUp: false,
-  errorSignUp: "",
+  errorSignUp: null,
+  successMessage: "",
 };
 
 const SignUpReducer = (state = initialState, action) => {
@@ -20,7 +25,8 @@ const SignUpReducer = (state = initialState, action) => {
         ...state,
         loadingSignUp: false,
         userSignUp: action.payload.data,
-        errorSignUp: "",
+        errorSignUp: null,
+        successMessage: "Dang ki thanh cong",
       };
     case SIGN_UP_FAIL:
       return {
@@ -29,8 +35,8 @@ const SignUpReducer = (state = initialState, action) => {
         errorSignUp: action.payload.error,
         loadingSignUp: false,
       };
-    case SIGN_UP_RESET:
-      return { ...state, errorSignUp: "" };
+    case SIGN_UP_ALERT_RESET:
+      return { ...state, errorSignUp: "", successMessage: "" };
     default:
       return state;
   }
