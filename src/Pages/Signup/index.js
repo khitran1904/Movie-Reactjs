@@ -27,19 +27,20 @@ export default function Signup() {
 
   const toggle = () => {
     setModal(!modal);
-    // dispatch(closeAction());
   };
 
   const toggleClose = (isDirty, isValid) => {
-    if (isDirty && !isValid) {
+    if (isDirty) {
       var r = window.confirm(
         "Ban co chac ban muon thoat khong. Neu thoat cac o thong tin se bi mat"
       );
       if (r) {
         dispatch(closeAction());
+        setModal(!modal);
       }
+    } else {
+      setModal(!modal);
     }
-    setModal(!modal);
   };
   const validationSchema = Yup.object({
     taiKhoan: Yup.string()
@@ -191,7 +192,7 @@ export default function Signup() {
                   <Button
                     color="danger"
                     onClick={() => {
-                      toggleClose(dirty, isValid);
+                      toggleClose(dirty);
                     }}
                   >
                     Thoát
