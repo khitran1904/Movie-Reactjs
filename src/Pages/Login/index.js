@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./style.css";
 import { loginAction } from "../../Action/Auth";
 import Signup from "../Signup";
@@ -94,9 +94,11 @@ export default function Login() {
             </form>
           )}
         </Formik>
-        <Signup />
+        <p>
+          To register new account <span>→</span>
+          <Link to="/signup">Click Here</Link>
+        </p>
       </div>
     </div>
   );
 }
-
