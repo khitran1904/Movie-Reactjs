@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
-export default function Header() {
-  let taiKhoan = "";
+export default function Header(props) {
+  let taiKhoan = null;
   if (localStorage.getItem("user") !== null) {
     taiKhoan = JSON.parse(localStorage.getItem("user")).taiKhoan;
   }
@@ -26,7 +26,7 @@ export default function Header() {
           </li>
         </ul>
       </div>
-      {taiKhoan === "" ? (
+      {!taiKhoan ? (
         <a href="/login" className="btn header__btn ">
           <i className="fa fa-user-tie"></i> &ensp; Đăng nhập / Đăng Kí
         </a>
