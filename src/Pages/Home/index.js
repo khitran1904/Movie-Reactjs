@@ -167,18 +167,18 @@ export default function Home() {
         <div className="carousel__filter">
           <div className="dropdown">
             <select name="movie" onChange={handleChange}>
-              <option>Phim</option>
+              <option>Chọn Phim</option>
               {handleRenderMovieOption()}
             </select>
           </div>
           <div className="dropdown">
             <form action="">
               <select name="theater" onChange={handleChange}>
-                <option>Rap</option>
+                <option>Chọn Rạp</option>
                 {selectMovieToBook.movie ? (
                   handleRenderTheaterOption()
                 ) : (
-                  <option>Vui long chon phim</option>
+                  <option>Vui lòng chọn phim</option>
                 )}
               </select>
             </form>
@@ -186,11 +186,11 @@ export default function Home() {
           <div className="dropdown">
             <form action="">
               <select name="date" onChange={handleChange}>
-                <option>Ngay xem</option>
+                <option>Chọn ngày xem</option>
                 {selectMovieToBook.movie && selectMovieToBook.theater ? (
                   handleRenderDateOption()
                 ) : (
-                  <option>Vui long chon phim va rap</option>
+                  <option>Vui lòng chọn phim</option>
                 )}
               </select>
             </form>
@@ -198,13 +198,13 @@ export default function Home() {
           <div className="dropdown">
             <form action="">
               <select name="time" onChange={handleChange}>
-                <option value="">Suat</option>
+                <option value="">Chọn suất chiếu</option>
                 {selectMovieToBook.movie &&
                 selectMovieToBook.theater &&
                 selectMovieToBook.date ? (
                   handleRenderTimeOption()
                 ) : (
-                  <option>Vui long chon phim, rap va ngay xem</option>
+                  <option>Vui lòng chọn ngày xem</option>
                 )}
               </select>
             </form>

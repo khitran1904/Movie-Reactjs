@@ -27,13 +27,15 @@
 .carousel__filter a{
     margin-bottom: auto;
     font-size: 18px;
+    justify-content: initial;
+    padding: 2px;
 }
 
 /* dropdown */
 
 .dropdown{
     float: left;
-    
+    /* display: block; */
 }
 .dropdown select{
     padding: 10px;
