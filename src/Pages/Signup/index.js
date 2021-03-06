@@ -1,10 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Link } from "react-router-dom";
 import { signUpAction } from "../../Action/Auth";
 import { Formik } from "formik";
-import { Prompt } from "react-router-dom";
 import * as Yup from "yup";
 import "./style.css";
 export default function Signup() {
@@ -26,14 +24,36 @@ export default function Signup() {
     hoTen: "",
   };
 
+  var seconds = 2;
+  var foo;
+
+  function redirect() {
+    document.location.href = '/';
+  }
+
+  function updateSecs() {
+    seconds--;
+    if (seconds ===-1) {
+      clearInterval(foo);
+      redirect();
+    }
+  }
+
+  function countdownTimer() {
+    foo = setInterval(function () {
+      updateSecs()
+    }, 1000);
+  }
+
+
   const validationSchema = Yup.object({
     taiKhoan: Yup.string()
       .required("Username is required")
-      .min(5, "Username must have at least 5 characters")
-      .max(10, "Username must have max 14 characters"),
+      .min(4, "Username must have at least 4 characters")
+      .max(10, "Username must have max 10 characters"),
     matKhau: Yup.string()
       .required("Password is required")
-      .min(6, "Password is too short - should be 6 chars minimum"),
+      .min(4, "Password is too short - should be 4 chars minimum"),
     soDt: Yup.string()
       .required("Phone number is required")
       .matches(
@@ -50,7 +70,8 @@ export default function Signup() {
   });
 
   if (userSignUp) {
-    return <Redirect to="/" />;
+    countdownTimer();
+    // return <Redirect to="/" />;
   }
   return (
     <div>
@@ -114,7 +135,6 @@ export default function Signup() {
                       className="form-input"
                       placeholder="Password"
                       name="matKhau"
-                      type="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.matKhau}
@@ -159,6 +179,7 @@ export default function Signup() {
                       value="Sign up"
                     />
                     {loadingSignUp && (
+                      // eslint-disable-next-line jsx-a11y/alt-text
                       <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                     )}
                   </div>

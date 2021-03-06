@@ -26,7 +26,7 @@ const SignUpReducer = (state = initialState, action) => {
         loadingSignUp: false,
         userSignUp: action.payload.data,
         errorSignUp: null,
-        successMessage: "Dang ki thanh cong",
+        successMessage: "Đăng kí tài khoản thành công !",
       };
     case SIGN_UP_FAIL:
       return {

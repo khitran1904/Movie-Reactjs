@@ -1,4 +1,4 @@
-import { ALERT_CLEAR, ALERT_FAILED, ALERT_SUCCESS } from "../Constants/Alert";
+import {  ALERT_FAILED, ALERT_SUCCESS } from "../Constants/Alert";
 
 let initialState = {
   message: "",
