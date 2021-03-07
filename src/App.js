@@ -8,6 +8,7 @@ import Signup from "./Pages/Signup";
 //Layout
 import MainLayout from "./Layout/MainLayout";
 import AdminLayout from "./Layout/AdminLayout";
+import AuthLayout from "./Layout/AuthLayout";
 //Style
 import "./Style/App.css";
 
@@ -15,23 +16,22 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          exact
-          path={["/", "/movie/:movieId", "/checkout", "/login", "/signup"]}
-        >
+        <Route exact path={["/", "/movie/:movieId", "/checkout"]}>
           <MainLayout>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route
-                exact
-                path="/movie/:movieId"
-                component={MovieDetail}
-              ></Route>
+              <Route exact path="/movie/:movieId" component={MovieDetail} />
               <Route exact path="/checkout" component={Checkout} />
+            </Switch>
+          </MainLayout>
+        </Route>
+        <Route>
+          <AuthLayout exact path={["/login", "/signup"]}>
+            <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
             </Switch>
-          </MainLayout>
+          </AuthLayout>
         </Route>
         <Route>
           <AdminLayout>

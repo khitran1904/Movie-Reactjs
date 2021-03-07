@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
-export default function Header(props) {
-  let taiKhoan = null;
+export default function Header() {
+  let taiKhoan = "";
   if (localStorage.getItem("user") !== null) {
     taiKhoan = JSON.parse(localStorage.getItem("user")).taiKhoan;
   }
@@ -26,14 +27,19 @@ export default function Header(props) {
           </li>
         </ul>
       </div>
-      {!taiKhoan ? (
-        <a href="/login" className="btn header__btn ">
-          <i className="fa fa-user-tie"></i> &ensp; Đăng nhập / Đăng Kí
-        </a>
+      {taiKhoan === "" ? (
+        <div className="d-flex ">
+          <Link to="/login" className="btn header__btn ">
+            Đăng nhập
+          </Link>
+          <Link to="/signup" className="btn header__btn ">
+            Đăng Kí
+          </Link>
+        </div>
       ) : (
-        <a href="/" className="btn header__btn">
+        <span className="btn header__btn">
           <i className="fa fa-user-tie"></i> &ensp; {taiKhoan}
-        </a>
+        </span>
       )}
     </header>
   );

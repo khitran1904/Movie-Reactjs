@@ -32,10 +32,6 @@ export default function Home() {
     }
   }, [selectMovieToBook.movie]);
 
-  // const formatDate = (date) => {
-  //   const dateObj = new Date(date + "T00:00:00");
-  //   return new Intl.DateTimeFormat("en-US").format(dateObj);
-  // };
   const handleRenderMovieOption = () => {
     return movieList.map((movie) => (
       <option key={movie.maPhim} value={movie.maPhim}>
@@ -55,10 +51,10 @@ export default function Home() {
   };
 
   const handleRenderDateOption = () => {
-    theaterList.map((theaterGroup) => {
-      theaterGroup.cumRapChieu.map((theater) => {
+    theaterList.forEach((theaterGroup) => {
+      theaterGroup.cumRapChieu.forEach((theater) => {
         if (theater.maCumRap === selectMovieToBook.theater) {
-          theater.lichChieuPhim.map((movieTime) => {
+          theater.lichChieuPhim.forEach((movieTime) => {
             filterTimeList.push(movieTime.ngayChieuGioChieu.split("T")[0]);
           });
         }
