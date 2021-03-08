@@ -194,7 +194,7 @@ export default function Signup() {
                   </div>
                 </form>
                 <p className="loginhere">
-                  Have already an account ?{" "}
+                  Have already an account ?
                   <Link to="/login">
                     <span href="#" className="loginhere-link">
                       Login here
