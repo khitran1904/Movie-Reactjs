@@ -9,6 +9,7 @@ export default function MovieDetail(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // eslint-disable-next-line no-unused-vars
   const { movieDetail } = useSelector((state) => {
     return state.movieReducer;
   });
@@ -54,7 +55,7 @@ export default function MovieDetail(props) {
             id="pills-home"
             aria-labelledby="pills-home-tab"
           >
-            asdasdjlkjA asdasdjlkjA
+            something
           </div>
           <div className="tab-pane fade" id="pills-profile">
             emmet23

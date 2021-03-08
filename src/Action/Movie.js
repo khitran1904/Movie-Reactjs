@@ -16,7 +16,7 @@ const getMovieListAction = () => {
     });
     axios
       .get(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=2&soPhanTuTrenTrang=9"
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=1&soPhanTuTrenTrang=8"
       )
       .then((result) => {
         dispatch({

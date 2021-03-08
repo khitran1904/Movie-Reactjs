@@ -30,6 +30,7 @@ export default function Home() {
     } else {
       dispatch(getListTheater(selectMovieToBook.movie));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectMovieToBook.movie]);
 
   // const formatDate = (date) => {
@@ -55,9 +56,12 @@ export default function Home() {
   };
 
   const handleRenderDateOption = () => {
+    // eslint-disable-next-line array-callback-return
     theaterList.map((theaterGroup) => {
+      // eslint-disable-next-line array-callback-return
       theaterGroup.cumRapChieu.map((theater) => {
         if (theater.maCumRap === selectMovieToBook.theater) {
+          // eslint-disable-next-line array-callback-return
           theater.lichChieuPhim.map((movieTime) => {
             filterTimeList.push(movieTime.ngayChieuGioChieu.split("T")[0]);
           });
@@ -73,8 +77,10 @@ export default function Home() {
 
   const handleRenderTimeOption = () => {
     return theaterList.map((theaterGroup) => {
+      // eslint-disable-next-line array-callback-return
       return theaterGroup.cumRapChieu.map((theater) => {
         if (theater.maCumRap === selectMovieToBook.theater) {
+          // eslint-disable-next-line array-callback-return
           return theater.lichChieuPhim.map((movieTime) => {
             if (
               movieTime.ngayChieuGioChieu.split("T")[0] ===
@@ -99,6 +105,7 @@ export default function Home() {
       };
     });
   };
+
   return (
     <div>
       <div className="carousel__movie" id="">
@@ -167,18 +174,18 @@ export default function Home() {
         <div className="carousel__filter">
           <div className="dropdown">
             <select name="movie" onChange={handleChange}>
-              <option>Phim</option>
+              <option>Chọn Phim</option>
               {handleRenderMovieOption()}
             </select>
           </div>
           <div className="dropdown">
             <form action="">
               <select name="theater" onChange={handleChange}>
-                <option>Rap</option>
+                <option>Chọn Rạp</option>
                 {selectMovieToBook.movie ? (
                   handleRenderTheaterOption()
                 ) : (
-                  <option>Vui long chon phim</option>
+                  <option>Vui lòng chọn phim</option>
                 )}
               </select>
             </form>
@@ -186,11 +193,11 @@ export default function Home() {
           <div className="dropdown">
             <form action="">
               <select name="date" onChange={handleChange}>
-                <option>Ngay xem</option>
+                <option>Chọn ngày xem</option>
                 {selectMovieToBook.movie && selectMovieToBook.theater ? (
                   handleRenderDateOption()
                 ) : (
-                  <option>Vui long chon phim va rap</option>
+                  <option>Vui lòng chọn phim</option>
                 )}
               </select>
             </form>
@@ -198,37 +205,38 @@ export default function Home() {
           <div className="dropdown">
             <form action="">
               <select name="time" onChange={handleChange}>
-                <option value="">Suat</option>
+                <option value="">Chọn suất chiếu</option>
                 {selectMovieToBook.movie &&
-                selectMovieToBook.theater &&
-                selectMovieToBook.date ? (
+                  selectMovieToBook.theater &&
+                  selectMovieToBook.date ? (
                   handleRenderTimeOption()
                 ) : (
-                  <option>Vui long chon phim, rap va ngay xem</option>
+                  <option>Vui lòng chọn ngày xem</option>
                 )}
               </select>
             </form>
           </div>
-          <Link
-            to={{
-              pathname: "/checkout",
-              state: { bookMovie: selectMovieToBook },
-            }}
-          >
-            <button
-              disabled={
-                selectMovieToBook.movie &&
+
+          <button
+            disabled={
+              selectMovieToBook.movie &&
                 selectMovieToBook.theater &&
                 selectMovieToBook.date &&
                 selectMovieToBook.time
-                  ? false
-                  : true
-              }
-              className="btn btn-success"
+                ? false
+                : true
+            }
+            className="btn btn-success"
+          >
+            <Link className="btn__filter"
+              to={{
+                pathname: "/checkout",
+                state: { bookMovie: selectMovieToBook },
+              }}
             >
-              Mua vé
-            </button>
-          </Link>
+              Mua Vé
+            </Link>
+          </button>
         </div>
       </div>
       <div className="movie text-center">
@@ -239,14 +247,14 @@ export default function Home() {
             return (
               <div
                 key={movie.maPhim}
-                className="card text-left col-sm-4 my-4 mx-"
+                className=" text-left col-sm-3 my-2 "
               >
                 <img
-                  className="card-img-top"
-                  width="200px"
+                  className=""
+                  width="205px"
                   height="300px"
                   src={movie.hinhAnh}
-                  alt="HÌnh ảnh"
+                  alt="Hình ảnh"
                 />
                 <div className="card-body">
                   <h6 className="card-title">{movie.tenPhim}</h6>
