@@ -1,8 +1,9 @@
 import React from "react";
-export default function AdminLayout(props) {
+
+export default function AuthLayout(props) {
   return (
     <div>
-      <h1>AdminLayout</h1>
+      AuthLayout
       {props.children}
     </div>
   );

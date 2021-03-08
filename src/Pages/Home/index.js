@@ -30,13 +30,9 @@ export default function Home() {
     } else {
       dispatch(getListTheater(selectMovieToBook.movie));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectMovieToBook.movie]);
 
-  // const formatDate = (date) => {
-  //   const dateObj = new Date(date + "T00:00:00");
-  //   return new Intl.DateTimeFormat("en-US").format(dateObj);
-  // };
   const handleRenderMovieOption = () => {
     return movieList.map((movie) => (
       <option key={movie.maPhim} value={movie.maPhim}>
@@ -56,13 +52,10 @@ export default function Home() {
   };
 
   const handleRenderDateOption = () => {
-    // eslint-disable-next-line array-callback-return
-    theaterList.map((theaterGroup) => {
-      // eslint-disable-next-line array-callback-return
-      theaterGroup.cumRapChieu.map((theater) => {
+    theaterList.forEach((theaterGroup) => {
+      theaterGroup.cumRapChieu.forEach((theater) => {
         if (theater.maCumRap === selectMovieToBook.theater) {
-          // eslint-disable-next-line array-callback-return
-          theater.lichChieuPhim.map((movieTime) => {
+          theater.lichChieuPhim.forEach((movieTime) => {
             filterTimeList.push(movieTime.ngayChieuGioChieu.split("T")[0]);
           });
         }
@@ -207,8 +200,8 @@ export default function Home() {
               <select name="time" onChange={handleChange}>
                 <option value="">Chọn suất chiếu</option>
                 {selectMovieToBook.movie &&
-                  selectMovieToBook.theater &&
-                  selectMovieToBook.date ? (
+                selectMovieToBook.theater &&
+                selectMovieToBook.date ? (
                   handleRenderTimeOption()
                 ) : (
                   <option>Vui lòng chọn ngày xem</option>
@@ -220,15 +213,16 @@ export default function Home() {
           <button
             disabled={
               selectMovieToBook.movie &&
-                selectMovieToBook.theater &&
-                selectMovieToBook.date &&
-                selectMovieToBook.time
+              selectMovieToBook.theater &&
+              selectMovieToBook.date &&
+              selectMovieToBook.time
                 ? false
                 : true
             }
             className="btn btn-success"
           >
-            <Link className="btn__filter"
+            <Link
+              className="btn__filter"
               to={{
                 pathname: "/checkout",
                 state: { bookMovie: selectMovieToBook },
@@ -245,10 +239,7 @@ export default function Home() {
         <div className="movie__item row movie_list" id="movie">
           {movieList.map((movie) => {
             return (
-              <div
-                key={movie.maPhim}
-                className=" text-left col-sm-3 my-2 "
-              >
+              <div key={movie.maPhim} className=" text-left col-sm-3 my-2 ">
                 <img
                   className=""
                   width="205px"
@@ -258,8 +249,8 @@ export default function Home() {
                 />
                 <div className="card-body">
                   <h6 className="card-title">{movie.tenPhim}</h6>
-                  {/* <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}> */}
-                  <Link to={`/movie/${movie.maPhim}`}>
+                  <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}>
+                    {/* <Link to={`/movie/${movie.maPhim}`}> */}
                     <button className="btn btn-success">Detail</button>
                   </Link>
                 </div>

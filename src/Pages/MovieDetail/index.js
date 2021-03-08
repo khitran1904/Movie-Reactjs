@@ -6,7 +6,7 @@ export default function MovieDetail(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMovieDetailAction(props.match.params.movieId));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // eslint-disable-next-line no-unused-vars
@@ -15,6 +15,7 @@ export default function MovieDetail(props) {
   });
   return (
     <div className="detailMovie">
+      {console.log(movieDetail)}
       <div className="detailMovieTop"></div>
       <div>
         <ul className="nav nav-pills mb-3" id="pills-tab">

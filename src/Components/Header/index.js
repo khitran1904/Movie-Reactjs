@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 export default function Header() {
   let taiKhoan = "";
@@ -27,13 +28,18 @@ export default function Header() {
         </ul>
       </div>
       {taiKhoan === "" ? (
-        <a href="/login" className="btn header__btn ">
-          <i className="fa fa-user-tie"></i> &ensp; Đăng nhập / Đăng Kí
-        </a>
+        <div className="d-flex ">
+          <Link to="/login" className="btn header__btn ">
+            Đăng nhập
+          </Link>
+          <Link to="/signup" className="btn header__btn ">
+            Đăng Kí
+          </Link>
+        </div>
       ) : (
-        <a href="/" className="btn header__btn">
+        <span className="btn header__btn">
           <i className="fa fa-user-tie"></i> &ensp; {taiKhoan}
-        </a>
+        </span>
       )}
     </header>
   );
