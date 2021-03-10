@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signUpAction } from "../../Action/Auth";
-import { Formik } from "formik";
+import { Formik, useFormikContext } from "formik";
+import { Prompt } from "react-router-dom";
 import * as Yup from "yup";
 import "./style.css";
 export default function Signup() {
@@ -28,12 +29,12 @@ export default function Signup() {
   var foo;
 
   function redirect() {
-    document.location.href = '/';
+    document.location.href = "/";
   }
 
   function updateSecs() {
     seconds--;
-    if (seconds ===-1) {
+    if (seconds === -1) {
       clearInterval(foo);
       redirect();
     }
@@ -41,10 +42,19 @@ export default function Signup() {
 
   function countdownTimer() {
     foo = setInterval(function () {
-      updateSecs()
+      updateSecs();
     }, 1000);
   }
 
+  const PromptIfDirty = () => {
+    const formik = useFormikContext();
+    return (
+      <Prompt
+        when={formik.dirty}
+        message="Are you sure you want to leave? You have with unsaved changes."
+      />
+    );
+  };
 
   const validationSchema = Yup.object({
     taiKhoan: Yup.string()
@@ -71,7 +81,6 @@ export default function Signup() {
 
   if (userSignUp) {
     countdownTimer();
-    // return <Redirect to="/" />;
   }
   return (
     <div>
@@ -101,6 +110,7 @@ export default function Signup() {
                   onSubmit={handleSubmit}
                 >
                   <h2 className="form-title">Create account</h2>
+                  <PromptIfDirty />
                   <div className="form-group">
                     <input
                       className="form-input"
@@ -179,8 +189,10 @@ export default function Signup() {
                       value="Sign up"
                     />
                     {loadingSignUp && (
-                      // eslint-disable-next-line jsx-a11y/alt-text
-                      <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                      <img
+                        alt="#"
+                        src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                      />
                     )}
                   </div>
                   <div className="form-group">
@@ -203,7 +215,7 @@ export default function Signup() {
                   </div>
                 </form>
                 <p className="loginhere">
-                  Have already an account ?{" "}
+                  Have already an account ?
                   <Link to="/login">
                     <span href="#" className="loginhere-link">
                       Login here

@@ -1,0 +1,13 @@
+.movie-detail {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.movie-img {
+    overflow: hidden;
+}
+
+.movie-img img {
+    filter: blur(15px);
+}

@@ -61,13 +61,10 @@ export default function Home() {
   };
 
   const handleRenderDateOption = () => {
-    // eslint-disable-next-line array-callback-return
-    theaterList.map((theaterGroup) => {
-      // eslint-disable-next-line array-callback-return
-      theaterGroup.cumRapChieu.map((theater) => {
+    theaterList.forEach((theaterGroup) => {
+      theaterGroup.cumRapChieu.forEach((theater) => {
         if (theater.maCumRap === selectMovieToBook.theater) {
-          // eslint-disable-next-line array-callback-return
-          theater.lichChieuPhim.map((movieTime) => {
+          theater.lichChieuPhim.forEach((movieTime) => {
             filterTimeList.push(movieTime.ngayChieuGioChieu.split("T")[0]);
           });
         }
@@ -212,8 +209,8 @@ export default function Home() {
               <select name="time" onChange={handleChange}>
                 <option value="">Chọn suất chiếu</option>
                 {selectMovieToBook.movie &&
-                  selectMovieToBook.theater &&
-                  selectMovieToBook.date ? (
+                selectMovieToBook.theater &&
+                selectMovieToBook.date ? (
                   handleRenderTimeOption()
                 ) : (
                   <option>Vui lòng chọn ngày xem</option>
@@ -225,15 +222,16 @@ export default function Home() {
           <button
             disabled={
               selectMovieToBook.movie &&
-                selectMovieToBook.theater &&
-                selectMovieToBook.date &&
-                selectMovieToBook.time
+              selectMovieToBook.theater &&
+              selectMovieToBook.date &&
+              selectMovieToBook.time
                 ? false
                 : true
             }
             className="btn btn-success"
           >
-            <Link className="btn__filter"
+            <Link
+              className="btn__filter"
               to={{
                 pathname: "/checkout",
                 state: { bookMovie: selectMovieToBook },
