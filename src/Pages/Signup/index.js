@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signUpAction } from "../../Action/Auth";
 import { Formik, useFormikContext } from "formik";
 import { Prompt } from "react-router-dom";
@@ -81,7 +81,6 @@ export default function Signup() {
 
   if (userSignUp) {
     countdownTimer();
-    // return <Redirect to="/" />;
   }
   return (
     <div>
