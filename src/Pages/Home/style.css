@@ -69,13 +69,69 @@
     border: none;
 }
 
-.movie__item img {
-    border-radius: 10px;
+.movie__title{
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
 }
+.movie__score{
+    position: absolute;
+    display: inline;
+    margin-left: 0;
+    background: red;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+}
+.movie__score i{
+    font-size: 12px;
+}
+
+.div__image{
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.image__overlay{
+    opacity: 0.8;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background:linear-gradient(to bottom,#1d1b1a,#1d1d19) ;
+    transform: translateX(-145%) ;
+    transition: all 0.5s;
+}
+
+.image__overlay i{
+    color: white; 
+    margin-top: 30%;
+    font-size: 70px;
+}
+
+.image__overlay i:hover{
+color: rgb(187, 236, 212);
+}
+
+.div__image:hover .image__overlay{
+    transform: translateX(-26%) ; 
+}
+
+.btn__buyTicket{
+    width: 90%;
+    margin-left: 5%;
+    height: 45px;
+}
+.btn__buyTicket:hover{
+    background-color: rgb(255, 73, 73);
+}
+
 button{
     color: white;
     margin-bottom: 10px;
-    
 }
 .btn__filter{
     text-decoration: none;
@@ -87,3 +143,66 @@ button{
     margin: 0;
     font-size: 18px;
 }
+
+/* Modal  */
+.modal{
+    width: 80%;
+    height: 80%;
+    margin-left: 0%;
+
+}
+.modal__body{
+    background-color: black;
+    padding: 0cm;
+    margin-bottom: 0;
+}
+
+.video__trailer{
+    margin-left: 0;
+    width: 900px;
+    height: 500px;
+}
+
+
+/* news */
+
+.news{
+    margin-top: 40px;
+    margin-left: 40%;
+}
+
+.news a{
+    color: #1d1d19;
+}
+
+.new__list{
+    width: 80%;
+    margin-left: 10%;
+}
+
+.new__list img{
+    width: 90%;
+    display: block;
+    height: 65%;
+    border-radius: 10px;
+}
+
+.title{
+    font-size: 19px;
+    text-decoration: none;
+    color: #1d1d19;
+    font-weight: 400;
+    width: 85%;
+}
+.title:hover{
+    color: red;
+}
+
+
+.new__list p{
+    width: 85%;
+    display: block;
+    font-size: 14px;
+    margin-top: 15px;
+}
+

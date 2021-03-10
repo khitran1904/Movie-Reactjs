@@ -13,13 +13,13 @@ export default function Header() {
       <div className="header__center">
         <ul className="center__item">
           <li>
-            <a href="/">Lịch Chiếu</a>
+            <a href="#LichChieu">Lịch Chiếu</a>
           </li>
           <li>
-            <a href="/">Cụm rạp</a>
+            <a href="#filter">Mua vé nhanh</a>
           </li>
           <li>
-            <a href="#movie">Tin Tức</a>
+            <a href="#new">Tin Tức</a>
           </li>
           <li>
             <a href="/">Ứng dụng</a>
