@@ -28,18 +28,20 @@ export default function Header() {
         </ul>
       </div>
       {taiKhoan === "" ? (
-        <div className="d-flex ">
-          <Link to="/login" className="btn header__btn ">
+        <div className="d-flex user__action">
+          <Link to="/login" className="btn header__btn action__user">
             Đăng nhập
           </Link>
-          <Link to="/signup" className="btn header__btn ">
+          <Link to="/signup" className="btn header__btn action__user">
             Đăng Kí
           </Link>
         </div>
       ) : (
-        <span className="btn header__btn">
-          <i className="fa fa-user-tie"></i> &ensp; {taiKhoan}
-        </span>
+        <div className="d-flex user__action">
+          <span className="btn header__btn">
+            <i className="fa fa-user-tie"></i> &ensp; {taiKhoan}
+          </span>
+        </div>
       )}
     </header>
   );

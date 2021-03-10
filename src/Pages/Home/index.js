@@ -265,9 +265,8 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="">
-                        <p className="movie__score px-2">{movie.danhGia} <i class="fa fa-star"></i></p>
-                        <h6 className="card-title movie__title">{movie.tenPhim}</h6>
-                        {/* <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}> */}
+                        <p className="movie__score px-1 mx-2">{movie.danhGia} <i class="fa fa-star"></i></p>
+                        <h6 className="card-title movie__title ">{movie.tenPhim}</h6>
                         <Link to={`/movie/${movie.maPhim}`}>
                           <button className="btn__buyTicket btn btn-success">Mua Vé</button>
                         </Link>
@@ -294,8 +293,8 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="">
-                        <h6 className="card-title">{movie.tenPhim}</h6>
-                        {/* <Link to={`/movie/${movie.maPhim}-${movie.biDanh}`}> */}
+                        <p className="movie__score px-1 mx-2">{movie.danhGia} <i class="fa fa-star"></i></p>
+                        <h6 className="card-title movie__title ">{movie.tenPhim}</h6>
                         <Link to={`/movie/${movie.maPhim}`}>
                           <button className="btn__buyTicket btn btn-success">Mua Vé</button>
                         </Link>

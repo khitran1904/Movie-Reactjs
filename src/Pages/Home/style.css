@@ -70,14 +70,15 @@
 }
 
 .movie__title{
-    display: inline;
+    display: block;
     margin-top: 10px;
     margin-bottom: 10px;
-
+    margin-left: 50px;
+    height: 30px;
 }
 .movie__score{
     position: absolute;
-    display: inline;
+    /* display: block; */
     margin-left: 0;
     background: red;
     border-radius: 5px;
