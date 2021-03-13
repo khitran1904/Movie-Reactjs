@@ -5,6 +5,9 @@ import {
   GET_MOVIE_DETAIL_FAILED,
   GET_MOVIE_DETAIL_REQUEST,
   GET_MOVIE_DETAIL_SUCCESS,
+  GET_MOVIE_LIST_UPCOMING_REQUEST,
+  GET_MOVIE_LIST_UPCOMING_SUCCESS,
+  GET_MOVIE_LIST_UPCOMING_FAIL,
 } from "../Constants/Movie";
 import axiosCustom from "../utils/axiosClient";
 import axios from "axios";
@@ -16,7 +19,7 @@ const getMovieListAction = () => {
     });
     axios
       .get(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=1&soPhanTuTrenTrang=8"
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=4&soPhanTuTrenTrang=8"
       )
       .then((result) => {
         dispatch({
@@ -27,6 +30,32 @@ const getMovieListAction = () => {
       .catch((error) => {
         dispatch({
           type: GET_MOVIE_LIST_FAIL,
+          payload: {
+            error: error.response,
+          },
+        });
+      });
+  };
+};
+
+const getMovieListAction2 = () => {
+  return (dispatch) => {
+    dispatch({
+      type: GET_MOVIE_LIST_UPCOMING_REQUEST,
+    });
+    axios
+      .get(
+        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=2&soPhanTuTrenTrang=8"
+      )
+      .then((result) => {
+        dispatch({
+          type: GET_MOVIE_LIST_UPCOMING_SUCCESS,
+          payload: { data: result.data.items },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: GET_MOVIE_LIST_UPCOMING_FAIL,
           payload: {
             error: error.response,
           },
@@ -58,4 +87,4 @@ const getMovieDetailAction = (movieParam) => {
   };
 };
 
-export { getMovieListAction, getMovieDetailAction };
+export { getMovieListAction, getMovieDetailAction, getMovieListAction2 };
