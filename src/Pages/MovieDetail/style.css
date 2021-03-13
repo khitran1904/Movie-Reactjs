@@ -1,7 +1,9 @@
 .movie-detail {
-    background-position: center;
-    background-repeat: no-repeat;
+    height: 600px;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
 }
 
 .movie-img {
@@ -10,4 +12,39 @@
 
 .movie-img img {
     filter: blur(15px);
+}
+
+.movie-info {
+    width: 960px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.movie-poster-main img {
+    height: 100%;
+    width: 100%;
+    /* (img-height / img-width * container-width) */
+}
+
+.CircularProgressbar-text {
+    dominant-baseline: central !important;
+}
+
+.star-ratings {
+    display: table;
+    margin: 10px auto;
 }
