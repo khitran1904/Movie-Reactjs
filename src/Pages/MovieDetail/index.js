@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieDetailAction } from "../../Action/Movie";
-import LoadingPage from "../../Components/Loading";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { Button, Modal } from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
-import YoutubePopup from "../../Components/YtbPopup";
+import LoadingPage from "../../Components/Loading";
 import "react-circular-progressbar/dist/styles.css";
 import "./style.css";
+
 export default function MovieDetail(props) {
   const dispatch = useDispatch();
-  const percentage = 66;
+  var movieTime = {};
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const { movieDetail, loading } = useSelector((state) => {
     return state.movieReducer;
   });
@@ -18,8 +22,18 @@ export default function MovieDetail(props) {
     dispatch(getMovieDetailAction(props.match.params.movieId));
   }, []); //eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleRenderStarRating = (rates) => {
-    for (let i = 0; i < rates / 2; i++) {}
+  const handleUrlTrailer = (urlTrailer) => {
+    if (urlTrailer) {
+      if (urlTrailer.includes("https://www.youtube.com/embed/")) {
+        return urlTrailer;
+      } else if (urlTrailer.includes("https://www.youtube.com/watch")) {
+        return urlTrailer;
+      } else {
+        return "https://www.youtube.com/embed/ZMT5u8Kb7pI";
+      }
+    } else {
+      return "https://www.youtube.com/embed/ZMT5u8Kb7pI";
+    }
   };
 
   if (loading) {
@@ -37,20 +51,67 @@ export default function MovieDetail(props) {
         }}
       >
         <div className="bg-overlay"></div>
-        <div className="movie-img"></div>
         <div className="movie-info row">
-          <div className="movie-poster col-3">
+          <div className="movie-poster col-5">
             <div className="movie-poster-main">
               <img src={movieDetail.hinhAnh} className="" alt="" />
             </div>
           </div>
           <div className="movie-main-info col-5">
             <p className="movie-date">
-              {movieDetail.ngayKhoiChieu?.split("T")[0]}
+              Ngày chiếu: {movieDetail.ngayKhoiChieu?.split("T")[0]}
             </p>
-            <p className="movie-name">{movieDetail.tenPhim?.toUpperCase()}</p>
+            <p className="movie-name">
+              Tên phim: {movieDetail.tenPhim?.toUpperCase()}
+            </p>
 
-            <p className="movie-time"></p>
+            <p className="movie-time">
+              {movieDetail.lichChieu?.forEach((time, index) => {
+                if (index === 0) {
+                  return (movieTime = time);
+                }
+              })}
+              Thời lượng: {movieTime.thoiLuong}
+            </p>
+
+            <Button
+              variant="danger"
+              className="btn-trailer"
+              onClick={handleShow}
+            >
+              Xem Trailer
+            </Button>
+
+            <Modal
+              className="modal"
+              show={show}
+              onHide={handleClose}
+              animation={true}
+            >
+              <Modal.Body>
+                <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+                  <iframe
+                    id="ytplayer"
+                    src={handleUrlTrailer(movieDetail.trailer)}
+                    title={movieDetail.tenPhim}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    frameBorder={0}
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                  />
+                </div>
+              </Modal.Body>
+            </Modal>
+
+            <Button variant="success" className="btn-bookMovie ">
+              Đặt vé
+            </Button>
           </div>
           <div className="movie-rating col-2">
             <CircularProgressbar
@@ -81,9 +142,7 @@ export default function MovieDetail(props) {
             />
           </div>
         </div>
-        <div className="movie-rating col-5"></div>
       </div>
-      <YoutubePopup trailer={movieDetail.trailer} />
     </div>
   );
 }
