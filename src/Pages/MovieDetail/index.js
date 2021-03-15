@@ -71,7 +71,7 @@ export default function MovieDetail(props) {
                   return (movieTime = time);
                 }
               })}
-              Thời lượng: {movieTime.thoiLuong}
+              Thời lượng: {movieTime.thoiLuong} phút
             </p>
 
             <Button
@@ -143,6 +143,7 @@ export default function MovieDetail(props) {
           </div>
         </div>
       </div>
+      <div className="movie-schdule"></div>
     </div>
   );
 }
