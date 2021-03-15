@@ -1,0 +1,32 @@
+.logo__film{
+    width: 100px;
+    height: 100px;
+    margin-left: 10%;
+    border-radius: 50%;
+}
+
+.title__film{
+    font-size: 25px;
+    font-family: sans-serif;
+}
+
+.screen{
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.listSeat{
+    width: 60%;
+    margin-left: 10%;
+}
+
+.seat__item{
+    margin-right: 3px;
+    color: black;
+    background-color: white;
+    border:   1px solid #01c73c;;
+}
+
+.seat__item:disabled{
+    background-color: #01c73c;
+}

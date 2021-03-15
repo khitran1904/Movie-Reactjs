@@ -29,9 +29,15 @@ export default function Home() {
 
   // Modal
   const [show, setShow] = useState(false);
-
+  const [modalUrl, setModalUrl] = useState();
+  
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (trailer) => {
+      setModalUrl(trailer);
+      setShow(true);
+  }
+
+  
 
   useEffect(() => {
     if (isMounted.current) {
@@ -209,8 +215,8 @@ export default function Home() {
               <select name="time" onChange={handleChange}>
                 <option value="">Chọn suất chiếu</option>
                 {selectMovieToBook.movie &&
-                selectMovieToBook.theater &&
-                selectMovieToBook.date ? (
+                  selectMovieToBook.theater &&
+                  selectMovieToBook.date ? (
                   handleRenderTimeOption()
                 ) : (
                   <option>Vui lòng chọn ngày xem</option>
@@ -222,9 +228,9 @@ export default function Home() {
           <button
             disabled={
               selectMovieToBook.movie &&
-              selectMovieToBook.theater &&
-              selectMovieToBook.date &&
-              selectMovieToBook.time
+                selectMovieToBook.theater &&
+                selectMovieToBook.date &&
+                selectMovieToBook.time
                 ? false
                 : true
             }
@@ -261,7 +267,7 @@ export default function Home() {
                       <div className="div__image">
                         <img className="item__image" width="205px" height="300px" src={movie.hinhAnh} alt="Hình ảnh" />
                         <div className="image__overlay">
-                          <i class="fa fa-play-circle" onClick={handleShow}></i>
+                          <i class="fa fa-play-circle" onClick={()=>handleShow(movie.trailer)}></i>
                         </div>
                       </div>
                       <div className="">
@@ -270,12 +276,10 @@ export default function Home() {
                         <Link to={`/movie/${movie.maPhim}`}>
                           <button className="btn__buyTicket btn btn-success">Mua Vé</button>
                         </Link>
+                        <Link to={`/bookingTickets/${movie.maPhim}/${movie.maPhim}`}>
+                          <button className="btn__buyTicket btn btn-success">Trang chọn ghế</button>
+                        </Link>
                       </div>
-                      <Modal className="modal" show={show} onHide={handleClose} animation={true} >
-                        <Modal.Body className=" modal__body">
-                          <iframe className="video__trailer" src={movie.trailer} title={movie.tenPhim}></iframe>
-                        </Modal.Body>
-                      </Modal>
                     </div>
                   );
                 })}
@@ -299,11 +303,6 @@ export default function Home() {
                           <button className="btn__buyTicket btn btn-success">Mua Vé</button>
                         </Link>
                       </div>
-                      <Modal className="modal" show={show} onHide={handleClose} animation={true} >
-                        <Modal.Body className=" modal__body">
-                          <iframe className="video__trailer" src={movie.trailer} title={movie.tenPhim}></iframe>
-                        </Modal.Body>
-                      </Modal>
                     </div>
                   );
                 })}
@@ -353,21 +352,21 @@ export default function Home() {
                 <div className="col-6" >
                   <img src="https://s3img.vcdn.vn/123phim/2021/03/bhd-59k-ve-ca-tuan-16151022245962.jpg" alt="" />
                   <a className="title" href="https://tix.vn/khuyen-mai/7958-bhd-59k-ve-ca-tuan">
-                  BHD 59K/VÉ CẢ TUẦN !!!
+                    BHD 59K/VÉ CẢ TUẦN !!!
                   </a>
                   <p>
-                  Tận hưởng Ưu Đãi lên đến 3 VÉ BHD Star mỗi tuần chỉ 
-                  với giá 59k/vé khi mua vé trên TIX hoặc Mục Vé Phim trên ZaloPay....
+                    Tận hưởng Ưu Đãi lên đến 3 VÉ BHD Star mỗi tuần chỉ
+                    với giá 59k/vé khi mua vé trên TIX hoặc Mục Vé Phim trên ZaloPay....
                   </p>
                 </div>
                 <div className="col-6" >
                   <img src="https://s3img.vcdn.vn/123phim/2020/11/tix-1k-ve-ngai-chi-gia-ve-16045662877511.jpg" alt="" />
                   <a className="title" href="https://tix.vn/khuyen-mai/7955-tix-1k-ve-ngai-chi-gia-ve">
-                  TIX 1K/VÉ NGẠI CHI GIÁ VÉ
+                    TIX 1K/VÉ NGẠI CHI GIÁ VÉ
                   </a>
                   <p>
-                  Đồng giá 1k/vé cả tuần tất cả các rạp trên TIX + 
-                  Nhận thêm 02 voucher thanh toán ZaloPay thả ga..
+                    Đồng giá 1k/vé cả tuần tất cả các rạp trên TIX +
+                    Nhận thêm 02 voucher thanh toán ZaloPay thả ga..
                   </p>
                 </div>
               </div>
@@ -375,8 +374,12 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer></footer>
-
+      <Modal className="modal" show={show} onHide={handleClose} >
+        <Modal.Body className=" modal__body">
+          <iframe className="video__trailer" src={modalUrl} title="movie.tenPhim"></iframe>
+        </Modal.Body>
+      </Modal>
     </div>
+
   );
 }
