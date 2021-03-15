@@ -354,7 +354,6 @@ export default function Home() {
                               }}
                               frameBorder={0}
                               allow="autoplay; fullscreen"
-                              allowFullScreen
                             />
                           </div>
 
@@ -444,7 +443,6 @@ export default function Home() {
                               }}
                               frameBorder={0}
                               allow="autoplay; fullscreen"
-                              allowFullScreen
                             />
                           </div>
                         </Modal.Body>

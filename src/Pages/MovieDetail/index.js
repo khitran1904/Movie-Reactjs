@@ -27,7 +27,7 @@ export default function MovieDetail(props) {
       if (urlTrailer.includes("https://www.youtube.com/embed/")) {
         return urlTrailer;
       } else if (urlTrailer.includes("https://www.youtube.com/watch")) {
-        return urlTrailer;
+        return urlTrailer.replace("/watch?v=", "/embed/");
       } else {
         return "https://www.youtube.com/embed/ZMT5u8Kb7pI";
       }
@@ -103,7 +103,7 @@ export default function MovieDetail(props) {
                     }}
                     frameBorder={0}
                     allow="autoplay; fullscreen"
-                    allowFullScreen
+                    // allowFullScreen
                   />
                 </div>
               </Modal.Body>
