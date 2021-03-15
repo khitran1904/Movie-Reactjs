@@ -498,8 +498,10 @@ export default function Home() {
       </div>
       <Modal className="modal" show={show} onHide={handleClose} >
         <Modal.Body className=" modal__body">
-          {/* <iframe className="video__trailer" src={modalUrl} title="movie.tenPhim"></iframe> */}
-          <iframe className="video__trailer" src={modalUrl} title="{movie.tenPhim}" />
+        <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+          <iframe frameBorder={0} allow="autoplay; fullscreen" allowFullScreen 
+                  className="video__trailer" src={modalUrl} title="{movie.tenPhim}" />
+                </div>
         </Modal.Body>
       </Modal>
 
