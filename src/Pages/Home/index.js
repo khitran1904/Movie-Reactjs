@@ -32,15 +32,15 @@ export default function Home() {
   // Modal
   const [show, setShow] = useState(false);
   const [modalUrl, setModalUrl] = useState();
-  
+
   const handleClose = () => setShow(false);
   const handleShow = (trailer) => {
-      let trailer1 = trailer.toString().replace( "/watch?v=", "/embed/" );
-      setModalUrl(trailer1);
-      setShow(true);
+    let trailer1 = trailer.toString().replace("/watch?v=", "/embed/");
+    setModalUrl(trailer1);
+    setShow(true);
   }
 
-  
+
 
   useEffect(() => {
     if (isMounted.current) {
@@ -352,23 +352,11 @@ export default function Home() {
               >
                 {movieListUpcoming.map((movie) => {
                   return (
-                    <div
-                      key={movie.maPhim}
-                      className=" text-left col-md-3 col-sm-4 my-2 "
-                    >
+                    <div key={movie.maPhim} className=" text-left col-md-3 col-sm-4 my-2 " >
                       <div className="div__image">
-                        <img
-                          className="item__image"
-                          width="205px"
-                          height="300px"
-                          src={movie.hinhAnh}
-                          alt="Hình ảnh"
-                        />
+                        <img className="item__image" width="205px" height="300px" src={movie.hinhAnh} alt="Hình ảnh" />
                         <div className="image__overlay">
-                          <i
-                            className="fa fa-play-circle"
-                            onClick={handleShow}
-                          ></i>
+                          <i className="fa fa-play-circle" onClick={() => {handleShow(movie.trailer)}}></i>
                         </div>
                       </div>
                       <div className="">
