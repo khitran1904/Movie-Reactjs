@@ -22,9 +22,10 @@
     /* border: 1px solid black; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.596);
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-around;
 }
-.carousel__filter a{
+
+.carousel__filter a {
     margin-bottom: auto;
     font-size: 18px;
     justify-content: initial;
@@ -33,12 +34,13 @@
 
 /* dropdown */
 
-.dropdown{
+.dropdown {
     float: left;
     padding: 1px;
     /* display: block; */
 }
-.dropdown select{
+
+.dropdown select {
     padding: 10px;
     border: none;
     border-right: 1px solid rgba(0, 0, 0, 0.267);
@@ -65,18 +67,20 @@
     text-align: center;
     padding-top: 30px;
 }
-.movie__item{
+
+.movie__item {
     border: none;
 }
 
-.movie__title{
+.movie__title {
     display: block;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 50px;
     height: 30px;
 }
-.movie__score{
+
+.movie__score {
     position: absolute;
     /* display: block; */
     margin-left: 0;
@@ -85,125 +89,128 @@
     color: white;
     font-weight: 700;
 }
-.movie__score i{
+
+.movie__score i {
     font-size: 12px;
 }
 
-.div__image{
+.div__image {
     position: relative;
     overflow: hidden;
     border-radius: 8px;
 }
 
-.image__overlay{
+.image__overlay {
     opacity: 0.8;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     width: 200%;
     height: 100%;
-    background:linear-gradient(to bottom,#1d1b1a,#1d1d19) ;
-    transform: translateX(-145%) ;
+    background: linear-gradient(to bottom, #1d1b1a, #1d1d19);
+    transform: translateX(-145%);
     transition: all 0.5s;
 }
 
-.image__overlay i{
-    color: white; 
+.image__overlay i {
+    color: white;
     margin-top: 30%;
     font-size: 70px;
 }
 
-.image__overlay i:hover{
-color: rgb(187, 236, 212);
+.image__overlay i:hover {
+    color: rgb(187, 236, 212);
 }
 
-.div__image:hover .image__overlay{
-    transform: translateX(-26%) ; 
+.div__image:hover .image__overlay {
+    transform: translateX(-26%);
 }
 
-.btn__buyTicket{
+.btn__buyTicket {
     width: 90%;
     margin-left: 5%;
     height: 45px;
 }
-.btn__buyTicket:hover{
+
+.btn__buyTicket:hover {
     background-color: rgb(255, 73, 73);
 }
 
-button{
+button {
     color: white;
     margin-bottom: 10px;
 }
-.btn__filter{
+
+.btn__filter {
     text-decoration: none;
     color: white;
     font-size: 15px;
 }
-.btn__filter:hover{
+
+.btn__filter:hover {
     color: white;
     margin: 0;
     font-size: 18px;
 }
 
 /* Modal  */
-.modal{
+
+/* .modal {
     width: 80%;
     height: 80%;
     margin-left: 0%;
+} */
 
-}
-.modal__body{
+/* .modal__body {
     background-color: black;
     padding: 0cm;
     margin-bottom: 0;
 }
 
-.video__trailer{
+.video__trailer {
     margin-left: 0;
     width: 900px;
     height: 500px;
-}
-
+} */
 
 /* news */
 
-.news{
+.news {
     margin-top: 40px;
     margin-left: 40%;
 }
 
-.news a{
+.news a {
     color: #1d1d19;
 }
 
-.new__list{
+.new__list {
     width: 80%;
     margin-left: 10%;
 }
 
-.new__list img{
+.new__list img {
     width: 90%;
     display: block;
     height: 65%;
     border-radius: 10px;
 }
 
-.title{
+.title {
     font-size: 19px;
     text-decoration: none;
     color: #1d1d19;
     font-weight: 400;
     width: 85%;
 }
-.title:hover{
+
+.title:hover {
     color: red;
 }
 
-
-.new__list p{
+.new__list p {
     width: 85%;
     display: block;
     font-size: 14px;
     margin-top: 15px;
 }
-
