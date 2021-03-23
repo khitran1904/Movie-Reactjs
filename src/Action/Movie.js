@@ -3,23 +3,23 @@ import {
   GET_MOVIE_LIST_REQUEST,
   GET_MOVIE_LIST_SUCCESS,
   GET_MOVIE_DETAIL_FAILED,
-  GET_MOVIE_DETAIL_REQUEST,
   GET_MOVIE_DETAIL_SUCCESS,
+  GET_MOVIE_DETAIL_REQUEST,
   GET_MOVIE_LIST_UPCOMING_REQUEST,
   GET_MOVIE_LIST_UPCOMING_SUCCESS,
   GET_MOVIE_LIST_UPCOMING_FAIL,
+  GET_MOVIE_DETAIL_SCHEDULE_SUCCESS,
+  GET_MOVIE_DETAIL_SCHEDULE_FAILED,
 } from "../Constants/Movie";
 import axiosCustom from "../utils/axiosClient";
-import axios from "axios";
-
 const getMovieListAction = () => {
   return (dispatch) => {
     dispatch({
       type: GET_MOVIE_LIST_REQUEST,
     });
-    axios
+    axiosCustom
       .get(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=3&soPhanTuTrenTrang=8"
+        "QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=3&soPhanTuTrenTrang=8"
       )
       .then((result) => {
         dispatch({
@@ -43,9 +43,9 @@ const getMovieListAction2 = () => {
     dispatch({
       type: GET_MOVIE_LIST_UPCOMING_REQUEST,
     });
-    axios
+    axiosCustom
       .get(
-        "https://movie0706.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=2&soPhanTuTrenTrang=8"
+        "QuanLyPhim/LayDanhSachPhimPhanTrang?maNhom=GP01&soTrang=2&soPhanTuTrenTrang=8"
       )
       .then((result) => {
         dispatch({
@@ -65,13 +65,13 @@ const getMovieListAction2 = () => {
 };
 
 const getMovieDetailAction = (movieParam) => {
-  let movieId = movieParam.split("-");
+  let movieId = movieParam.split("-")[0];
   return (dispatch, getState) => {
     dispatch({
       type: GET_MOVIE_DETAIL_REQUEST,
     });
     axiosCustom
-      .get(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId[0]}`)
+      .get(`QuanLyPhim/LayThongTinPhim?MaPhim=${movieId}`)
       .then((result) => {
         dispatch({
           type: GET_MOVIE_DETAIL_SUCCESS,
@@ -87,4 +87,29 @@ const getMovieDetailAction = (movieParam) => {
   };
 };
 
-export { getMovieListAction, getMovieDetailAction, getMovieListAction2 };
+const getMovieDetailScheduleAction = (movieParam) => {
+  let movieId = movieParam.split("-")[0];
+  return (dispatch, getState) => {
+    axiosCustom
+      .get(`QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${movieId}`)
+      .then((result) => {
+        dispatch({
+          type: GET_MOVIE_DETAIL_SCHEDULE_SUCCESS,
+          payload: { data: result.data },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: GET_MOVIE_DETAIL_SCHEDULE_FAILED,
+          payload: { error: error.response.data },
+        });
+      });
+  };
+};
+
+export {
+  getMovieListAction,
+  getMovieDetailAction,
+  getMovieListAction2,
+  getMovieDetailScheduleAction,
+};
