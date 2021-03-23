@@ -1,3 +1,4 @@
+
 .logo__film{
     width: 100px;
     height: 100px;
@@ -11,8 +12,9 @@
 }
 
 .screen{
-    margin-left: 10%;
+    margin-left: 5%;
     margin-top: 3%;
+    
 }
 
 .listSeat{
@@ -22,11 +24,97 @@
 
 .seat__item{
     margin-right: 3px;
-    color: black;
-    background-color: white;
+    color: rgb(235, 225, 141);
+    background-color: rgb(32, 48, 45);
     border:   1px solid #01c73c;;
+    border-radius: 4px;
 }
 
 .seat__item:disabled{
-    background-color: #01c73c;
+    background-color: #cccccc;
+    border: #767e79;
+    color: rgb(54, 23, 23);
+}
+
+.isSelected__seat{
+    width: 23px;
+    height: 23px;
+    background-color: #cccccc;
+    float: left;
+    margin-left: 10px;
+    
+}
+
+.empty__seat{
+    width: 23px;
+    height: 23px;
+    background-color: rgb(27, 30, 34);
+    float: left;
+    margin-left: 10px;
+}
+
+.isChoose__seat {
+    width: 23px;
+    height: 23px;
+    background-color: Red;
+    float: left;
+    margin-left: 10px;
+}
+
+/* Thông tin đặt vé */
+
+
+.tickets__price{
+    text-align: center;
+    font-size: 34px;
+    color: #01c73c;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.tickets__list{
+    color: red;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+    width: 300px;
+}
+
+.ticket__item{
+    color:#767e79;
+    font-size: 17px;
+}
+
+.movie__score {
+    /* position: absolute */
+    /* display: block; */
+    margin-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;;
+    background: red;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+}
+.movie__name{
+    display: block;
+    margin-left: 20%;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 450;
+}
+.info__nameTheater{
+    display: block;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 450;
+}
+
+.Datve{
+    margin-top: 100px;
+    width: 100%;
+    height: 70px ;
+    background-image: linear-gradient(223deg,#b4ec51 0,#429321 100%);
+    border: none;
+    font-size: 20px;
 }

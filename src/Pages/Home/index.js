@@ -208,7 +208,7 @@ export default function Home() {
                 {selectMovieToBook.movie && selectMovieToBook.theater ? (
                   handleRenderDateOption()
                 ) : (
-                  <option>Vui lòng chọn rạp và phim</option>
+                  <option>Vui lòng chọn rạp</option>
                 )}
               </select>
             </form>
@@ -222,7 +222,7 @@ export default function Home() {
                   selectMovieToBook.date ? (
                   handleRenderTimeOption()
                 ) : (
-                  <option>Vui lòng chọn ngày xem rạp và phim</option>
+                  <option>Vui lòng chọn ngày xem</option>
                 )}
               </select>
             </form>
@@ -331,7 +331,7 @@ export default function Home() {
                             Mua Vé
                           </button>
                         </Link>
-                        <Link to={`/bookingTickets/${movie.maPhim}/${movie.maPhim}`}>
+                        <Link to={`/bookingTickets/${movie.maPhim}/40256`}>
                           <button className="btn__buyTicket btn btn-success">Trang chọn ghế</button>
                         </Link>
                       </div>
