@@ -23,7 +23,7 @@ export default function Header() {
             <a href="#new">Tin Tức</a>
           </li>
           <li>
-            <a href="/">Ứng dụng</a>
+            <a href="/bookingTickets">Ứng dụng</a>
           </li>
         </ul>
       </div>

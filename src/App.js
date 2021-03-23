@@ -6,6 +6,7 @@ import Login from "./Pages/Login";
 import Checkout from "./Pages/Checkout";
 import MovieDetail from "./Pages/MovieDetail";
 import Signup from "./Pages/Signup";
+import BookTickets from "./Pages/BookTickets";
 
 //Layout
 import MainLayout from "./Layout/MainLayout";
@@ -19,20 +20,22 @@ function App() {
     <BrowserRouter>
       <ScrollToTop>
         <Switch>
-          <Route exact path={["/", "/movie/:movieId", "/checkout"]}>
+          <Route exact path={["/", "/movie/:movieId", "/checkout","/bookingTickets/:movieId/:calendarID","/login", "/signup"]}>
             <MainLayout>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/movie/:movieId" component={MovieDetail} />
                 <Route exact path="/checkout" component={Checkout} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/bookingTickets/:movieId/:calendarID" component={BookTickets}/>
               </Switch>
             </MainLayout>
           </Route>
           <Route>
-            <AuthLayout exact path={["/login", "/signup"]}>
+            <AuthLayout exact path={[]}>
               <Switch>
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
+                
               </Switch>
             </AuthLayout>
           </Route>

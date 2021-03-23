@@ -31,8 +31,14 @@ export default function Home() {
 
   // Modal
   const [show, setShow] = useState(false);
+  const [modalUrl, setModalUrl] = useState();
+
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (trailer) => {
+    let trailer1 = trailer.toString().replace("/watch?v=", "/embed/");
+    setModalUrl(trailer1);
+    setShow(true);
+  };
 
   useEffect(() => {
     if (isMounted.current) {
@@ -306,8 +312,7 @@ export default function Home() {
                           <i
                             className="fa fa-play-circle"
                             onClick={() => {
-                              handleShow();
-                              console.log(movie.trailer);
+                              handleShow(movie.trailer);
                             }}
                           ></i>
                         </div>
@@ -324,42 +329,14 @@ export default function Home() {
                             Mua Vé
                           </button>
                         </Link>
+                        <Link
+                          to={`/bookingTickets/${movie.maPhim}/${movie.maPhim}`}
+                        >
+                          <button className="btn__buyTicket btn btn-success">
+                            Trang chọn ghế
+                          </button>
+                        </Link>
                       </div>
-                      <Modal
-                        className="modal"
-                        show={show}
-                        onHide={handleClose}
-                        animation={true}
-                      >
-                        <Modal.Body className=" modal__body">
-                          <div
-                            style={{
-                              padding: "56.25% 0 0 0",
-                              position: "relative",
-                            }}
-                          >
-                            <iframe
-                              id="ytplayer"
-                              src={movie.trailer.replace(
-                                "/watch?v=",
-                                "/embed/"
-                              )}
-                              title={movie.tenPhim}
-                              style={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                              }}
-                              frameBorder={0}
-                              allow="autoplay; fullscreen"
-                            />
-                          </div>
-
-                          {/* <iframe className="video__trailer" src={movie.trailer} title={movie.tenPhim}></iframe> */}
-                        </Modal.Body>
-                      </Modal>
                     </div>
                   );
                 })}
@@ -392,7 +369,9 @@ export default function Home() {
                         <div className="image__overlay">
                           <i
                             className="fa fa-play-circle"
-                            onClick={handleShow}
+                            onClick={() => {
+                              handleShow(movie.trailer);
+                            }}
                           ></i>
                         </div>
                       </div>
@@ -409,44 +388,6 @@ export default function Home() {
                           </button>
                         </Link>
                       </div>
-                      <Modal
-                        className="modal"
-                        show={show}
-                        onHide={handleClose}
-                        animation={true}
-                      >
-                        <Modal.Body className=" modal__body">
-                          {/* <iframe
-                            className="video__trailer"
-                            src={movie.trailer}
-                            title={movie.tenPhim}
-                          ></iframe> */}
-                          <div
-                            style={{
-                              padding: "56.25% 0 0 0",
-                              position: "relative",
-                            }}
-                          >
-                            <iframe
-                              id="ytplayer"
-                              src={movie.trailer.replace(
-                                "/watch?v=",
-                                "/embed/"
-                              )}
-                              title={movie.tenPhim}
-                              style={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                              }}
-                              frameBorder={0}
-                              allow="autoplay; fullscreen"
-                            />
-                          </div>
-                        </Modal.Body>
-                      </Modal>
                     </div>
                   );
                 })}
@@ -571,7 +512,20 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <footer></footer>
+      <Modal className="modal" show={show} onHide={handleClose}>
+        <Modal.Body className=" modal__body">
+          <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+            <iframe
+              frameBorder={0}
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              className="video__trailer"
+              src={modalUrl}
+              title="{movie.tenPhim}"
+            />
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }
