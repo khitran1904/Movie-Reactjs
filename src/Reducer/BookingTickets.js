@@ -3,7 +3,7 @@ import { BOOKING_TICKET_REQUEST,
   BOOKING_TICKET_FAIL } from "../Constants/Booking";
 
 let initialState = {
-    ticket: {},
+    ticket: null,
     loading:false,
     error: null,
   };

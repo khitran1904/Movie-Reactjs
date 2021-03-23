@@ -3,93 +3,134 @@ import React, { useEffect, useState } from 'react'
 import "./style.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getMovieDetailAction } from "../../Action/Movie";
+import { getListSeat } from "../../Action/Seat";
+import { bookingTicket } from "../../Action/Booking";
+
 // import Home from "../../Pages/Home";
 
 
 export default function BookTickets(props) {
-    
+
     // eslint-disable-next-line no-unused-vars
-    const [listSeat, setListSeat] = useState([{seatID:"A1",price:70000,isChoose:false,isSelected:false},{seatID:"A2",price:70000,isChoose:false,isSelected:false},
-    {seatID:"A3",price:70000,isChoose:false,isSelected:false},{seatID:"A4",price:70000,isChoose:false,isSelected:false},{seatID:"A5",price:70000,isChoose:false,isSelected:false},
-    {seatID:"A6",price:70000,isChoose:false,isSelected:false},{seatID:"A7",price:70000,isChoose:false,isSelected:false},{seatID:"A8",price:70000,isChoose:false,isSelected:false},
-    {seatID:"A9",price:70000,isChoose:false,isSelected:false},{seatID:"A10",price:70000,isChoose:false,isSelected:false},{seatID:"A11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"B1",price:70000,isChoose:false,isSelected:false},{seatID:"B2",price:70000,isChoose:false,isSelected:false},{seatID:"B3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"B4",price:70000,isChoose:false,isSelected:false},{seatID:"B5",price:70000,isChoose:false,isSelected:false},{seatID:"B6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"B7",price:70000,isChoose:false,isSelected:false},{seatID:"B8",price:70000,isChoose:false,isSelected:false},{seatID:"B8",price:70000,isChoose:false,isSelected:false},
-    {seatID:"B10",price:70000,isChoose:false,isSelected:false},{seatID:"B11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"C1",price:70000,isChoose:false,isSelected:false},{seatID:"C2",price:70000,isChoose:false,isSelected:false},{seatID:"C3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"C4",price:70000,isChoose:false,isSelected:false},{seatID:"C5",price:70000,isChoose:false,isSelected:false},{seatID:"C6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"C7",price:70000,isChoose:false,isSelected:false},{seatID:"C8",price:70000,isChoose:false,isSelected:false},{seatID:"C9",price:70000,isChoose:false,isSelected:false},
-    {seatID:"C10",price:70000,isChoose:false,isSelected:false},{seatID:"C11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"D1",price:70000,isChoose:false,isSelected:false},{seatID:"D2",price:70000,isChoose:false,isSelected:false},{seatID:"D3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"D4",price:70000,isChoose:false,isSelected:false},{seatID:"D5",price:70000,isChoose:false,isSelected:false},{seatID:"D6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"D7",price:70000,isChoose:false,isSelected:false},{seatID:"D8",price:70000,isChoose:false,isSelected:false},{seatID:"D9",price:70000,isChoose:false,isSelected:false},
-    {seatID:"D10",price:70000,isChoose:false,isSelected:false},{seatID:"D11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"E1",price:70000,isChoose:false,isSelected:false},{seatID:"E2",price:70000,isChoose:false,isSelected:false},{seatID:"E3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"E4",price:70000,isChoose:false,isSelected:false},{seatID:"E5",price:70000,isChoose:false,isSelected:false},{seatID:"E6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"E7",price:70000,isChoose:false,isSelected:false},{seatID:"E8",price:70000,isChoose:false,isSelected:false},{seatID:"E9",price:70000,isChoose:false,isSelected:false},
-    {seatID:"E10",price:70000,isChoose:false,isSelected:false},{seatID:"E11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"F1",price:70000,isChoose:false,isSelected:false},{seatID:"F2",price:70000,isChoose:false,isSelected:false},{seatID:"F3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"F4",price:70000,isChoose:false,isSelected:false},{seatID:"F5",price:70000,isChoose:false,isSelected:false},{seatID:"F6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"F7",price:70000,isChoose:false,isSelected:false},{seatID:"F8",price:70000,isChoose:false,isSelected:false},{seatID:"F9",price:70000,isChoose:false,isSelected:false},
-    {seatID:"F10",price:70000,isChoose:false,isSelected:false},{seatID:"F11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"H1",price:70000,isChoose:false,isSelected:false},{seatID:"H2",price:70000,isChoose:false,isSelected:false},{seatID:"H3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"H4",price:70000,isChoose:false,isSelected:false},{seatID:"H5",price:70000,isChoose:false,isSelected:false},{seatID:"H6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"H7",price:70000,isChoose:false,isSelected:false},{seatID:"H8",price:70000,isChoose:false,isSelected:false},{seatID:"H9",price:70000,isChoose:false,isSelected:false},
-    {seatID:"H10",price:70000,isChoose:false,isSelected:false},{seatID:"H11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"G1",price:70000,isChoose:false,isSelected:false},{seatID:"G2",price:70000,isChoose:false,isSelected:false},{seatID:"G3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"G4",price:70000,isChoose:false,isSelected:false},{seatID:"G5",price:70000,isChoose:false,isSelected:false},{seatID:"G6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"G7",price:70000,isChoose:false,isSelected:false},{seatID:"G8",price:70000,isChoose:false,isSelected:false},{seatID:"G9",price:70000,isChoose:false,isSelected:false},
-    {seatID:"G10",price:70000,isChoose:false,isSelected:false},{seatID:"G11",price:70000,isChoose:false,isSelected:false},
-    {seatID:"M1",price:70000,isChoose:false,isSelected:false},{seatID:"M2",price:70000,isChoose:false,isSelected:false},{seatID:"M3",price:70000,isChoose:false,isSelected:false},
-    {seatID:"M4",price:70000,isChoose:false,isSelected:false},{seatID:"M5",price:70000,isChoose:false,isSelected:false},{seatID:"M6",price:70000,isChoose:false,isSelected:false},
-    {seatID:"M7",price:70000,isChoose:false,isSelected:false},{seatID:"M8",price:70000,isChoose:false,isSelected:false},{seatID:"M9",price:70000,isChoose:false,isSelected:false},
-    {seatID:"M10",price:70000,isChoose:false,isSelected:false},{seatID:"M11",price:70000,isChoose:false,isSelected:false},])
-
     const dispatch = useDispatch();
-
+    const { taiKhoan } = JSON.parse(localStorage.getItem("user"));
     const { movieDetail } = useSelector((state) => {
         return state.movieReducer;
     });
-    // const {calendarID} = props.match.params;
+    const { listSeat, thongTinPhim } = useSelector((state) => state.ListSeatReducer);
+    const { ticket, error } = useSelector((state) => state.BookingTicketsReducer);
+
+    const [listPickedSeat, setListPickedSeat] = useState([]);
+    const [price, setPrice] = useState(0)
 
     useEffect(() => {
         dispatch(getMovieDetailAction(props.match.params.movieId));
+        dispatch(getListSeat(props.match.params.calendarID))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // useEffect(() => {
+    //     dispatch(getMovieDetailAction(props.match.params.movieId));
+    //     dispatch(getListSeat(props.match.params.calendarID))
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [ticket]);
+
+
+    
+    const pickUp = (callback) => {
+        if (listPickedSeat.length === 0) {
+            alert("Vui lòng chọn vé !")
+        }
+        else {
+            let values = {
+                "maLichChieu": props.match.params.calendarID,
+                "danhSachVe": listPickedSeat,
+                "taiKhoanNguoiDung": taiKhoan
+            };
+            dispatch(bookingTicket(values));
+            callback();
+        }
+    }
+    
+
+    
+    const pickSeat = (seat) => {
+        for (let i in listPickedSeat) {
+            if (listPickedSeat[i].stt === seat.stt) {
+                listPickedSeat.splice(i, 1);
+                setListPickedSeat(listPickedSeat);
+                let temp1 = price - seat.giaVe;
+                setPrice(temp1);
+                document.getElementById(seat.maGhe).style.backgroundColor = "rgb(27, 30, 34)";
+                return;
+            }
+        }
+        const b = [...listPickedSeat, seat]
+        setListPickedSeat(b);
+        let temp2 = price + seat.giaVe;
+        setPrice(temp2);
+        document.getElementById(seat.maGhe).style.backgroundColor = "red";
+    }
     // const user = localStorage.getItem("user");
     // if (user === null) {
     //     alert("Vui lòng đăng nhập để mua vé !")
     //     return < Home/>;
     // }
-
-    const pickSeat = (seatID) =>{
-        // eslint-disable-next-line array-callback-return
-        listSeat.map(item =>{
-            if(item.seatID === seatID)
-            {
-                item.isSelected=!item.isSelected
-            }
-        })
-    }
-
     return (
-        <div >
-            <div className="my-5" >
+        <div className="" >
+            <div className="my-4" >
                 <img className="logo__film" src={movieDetail.hinhAnh} />
                 <span className="title__film" > {movieDetail.tenPhim} </span>
             </div>
-            <div className="col-sm-8 screen" >
-                <img className="col-9 d-block" src="https://tix.vn/app/assets/img/icons/screen.png" />
-                <div className="listSeat" >
-                {
-                    listSeat.map((item)=>{
-                        return(
-                            <button className="col-1 seat__item" disabled={item.isChoose} onClick={()=> pickSeat(item.seatID) } >{ item.seatID }</button>
-                        )
-                    })
-                }
+            <div className="row container-fluid my-4" >
+                <div className="col-sm-8 screen" >
+                    <img className="col-9 d-block" src="https://tix.vn/app/assets/img/icons/screen.png" />
+                    <div className="listSeat" >
+                        {
+                            listSeat.map((item) => {
+                                return (
+                                    <button className="col-1 seat__item" id={item.maGhe}
+                                        disabled={item.daDat} onClick={() => pickSeat(item)} >{item.stt}</button>
+                                )
+                            })
+                        }
+                    </div>
+                    <div className="my-2 " style={{ marginLeft: "10%" }} >
+                        <span style={{ float: "left" }}>Ghế đã được mua </span>
+                        <div className="isSelected__seat " ></div>
+                        <span style={{ float: "left", marginLeft: "20px" }} >Ghế có thể mua </span>
+                        <div className="empty__seat " ></div>
+                        <span style={{ float: "left", marginLeft: "20px" }} >Ghế đang chọn </span>
+                        <div className="isChoose__seat " ></div>
+                    </div>
+                </div>
+                <div className="col-sm-3 center">
+                    <div className="tickets__price">
+                        {price}
+                    </div>
+                    <hr />
+                    <div className="mx-2 " >
+                        <span className="movie__score">
+                            {movieDetail.danhGia} <i className="fa fa-star"></i>
+                        </span>
+                        <span className="movie__name " >{movieDetail.tenPhim}</span>
+                        <span className="info__nameTheater " >{thongTinPhim.tenCumRap}</span>
+                        <span className="info__nameTheater " >{thongTinPhim.ngayChieu} - {thongTinPhim.gioChieu} - {thongTinPhim.tenRap}</span>
+                    </div>
+                    <hr />
+                    <span className="tickets__list" > Ghế : {
+                        listPickedSeat.map(item => {
+                            return (
+                                <span className="ticket__item" > {item.stt}</span>
+                            )
+                        })
+                    }
+                    </span>
+                    <button className="Datve" onClick={() => pickUp(()=>{
+                        console.log("ưqe")
+                    })} >
+                        Đặt Vé
+                    </button>
                 </div>
             </div>
         </div>
