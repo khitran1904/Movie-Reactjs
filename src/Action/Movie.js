@@ -10,6 +10,7 @@ import {
   GET_MOVIE_LIST_UPCOMING_FAIL,
   GET_MOVIE_DETAIL_SCHEDULE_SUCCESS,
   GET_MOVIE_DETAIL_SCHEDULE_FAILED,
+  RESET_MOVIE_DETAIL_SCHEDULE,
 } from "../Constants/Movie";
 import axiosCustom from "../utils/axiosClient";
 const getMovieListAction = () => {
@@ -107,9 +108,17 @@ const getMovieDetailScheduleAction = (movieParam) => {
   };
 };
 
+const resetMovieDetailSchedule = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_MOVIE_DETAIL_SCHEDULE,
+    });
+  };
+};
 export {
   getMovieListAction,
   getMovieDetailAction,
   getMovieListAction2,
   getMovieDetailScheduleAction,
+  resetMovieDetailSchedule,
 };

@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import ReactStars from "react-rating-stars-component";
+import { Button, Modal } from "react-bootstrap";
+import LoadingPage from "../../Components/Loading";
 import {
   getMovieDetailAction,
   getMovieDetailScheduleAction,
+  resetMovieDetailSchedule,
 } from "../../Action/Movie";
 import {
   getTheaterBrand,
   resetTheaterBrand,
   getBrandAddresses,
 } from "../../Action/Theater";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import { Button, Modal } from "react-bootstrap";
-import ReactStars from "react-rating-stars-component";
-import LoadingPage from "../../Components/Loading";
+
 import "react-circular-progressbar/dist/styles.css";
 import "./style.css";
 
 export default function MovieDetail(props) {
   const dispatch = useDispatch();
-  const [movieTime, setMovieTime] = useState("");
+  const [listTimeAvailable, setListTimeAvailable] = useState([]);
+  const [listBrandAvailable, setListBrandAvailable] = useState([]);
+  const [listCinemaAvailable, setListCinemaAvailable] = useState([]);
   const [pickCinemaBrand, setPickCinemaBrand] = useState("");
+  const [pickDateToBook, setPickDateToBook] = useState("");
+  const [dateArr, setDateArr] = useState([]);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -42,18 +49,71 @@ export default function MovieDetail(props) {
     dispatch(getTheaterBrand("Galaxy"));
     return () => {
       dispatch(resetTheaterBrand());
+      dispatch(resetMovieDetailSchedule());
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    dispatch(getBrandAddresses(pickCinemaBrand));
+    let tempArr = [];
+    if (movieSchedule.heThongRapChieu) {
+      setPickCinemaBrand(movieSchedule.heThongRapChieu[0].maHeThongRap);
+      setPickDateToBook(
+        movieSchedule.heThongRapChieu[0].cumRapChieu[0].lichChieuPhim[0].ngayChieuGioChieu.split(
+          "T"
+        )[0]
+      );
+      movieSchedule.heThongRapChieu.forEach((rapChieu) => {
+        tempArr.push(rapChieu.maHeThongRap);
+      });
+    }
+    setListBrandAvailable(tempArr);
+  }, [movieSchedule]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    let tempArr = [];
+    pickCinemaBrand && dispatch(getBrandAddresses(pickCinemaBrand));
+    generateListOfDaysToWatch(pickCinemaBrand);
+    if (movieSchedule.heThongRapChieu) {
+      movieSchedule.heThongRapChieu.forEach((rapChieu) => {
+        if (rapChieu.maHeThongRap === pickCinemaBrand) {
+          setPickDateToBook(
+            rapChieu.cumRapChieu[0].lichChieuPhim[0].ngayChieuGioChieu.split(
+              "T"
+            )[0]
+          );
+          rapChieu.cumRapChieu.forEach((cumRapChieu) => {
+            cumRapChieu.lichChieuPhim.forEach((lichChieu) => {
+              tempArr.push(lichChieu.ngayChieuGioChieu.split("T")[0]);
+            });
+          });
+        }
+      });
+    }
+    setListTimeAvailable(tempArr);
   }, [pickCinemaBrand]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    let tempArr = [];
     if (movieSchedule.heThongRapChieu) {
-      setPickCinemaBrand(movieSchedule.heThongRapChieu[0].maHeThongRap);
+      movieSchedule.heThongRapChieu.forEach((rapChieu) => {
+        if (rapChieu.maHeThongRap === pickCinemaBrand) {
+          rapChieu.cumRapChieu.forEach((cumRapChieu) => {
+            cumRapChieu.lichChieuPhim.every((lichChieu) => {
+              if (
+                lichChieu.ngayChieuGioChieu.split("T")[0] === pickDateToBook
+              ) {
+                tempArr.push(cumRapChieu);
+                return false;
+              } else {
+                return true;
+              }
+            });
+          });
+        }
+      });
     }
-  }, [movieSchedule.maPhim]);
+    setListCinemaAvailable(tempArr);
+  }, [pickDateToBook, pickCinemaBrand]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleUrlTrailer = (urlTrailer) => {
     if (urlTrailer) {
@@ -65,10 +125,53 @@ export default function MovieDetail(props) {
         return "https://www.youtube.com/embed/ZMT5u8Kb7pI";
       }
     } else {
-      if (1 === 2) return "https://www.youtube.com/embed/ZMT5u8Kb7pI";
+      return "https://www.youtube.com/embed/ZMT5u8Kb7pI";
     }
   };
 
+  const generateListOfDaysToWatch = (pickCinemaBrand) => {
+    let tmpArr = [];
+    let count = 15;
+    let today = null;
+    if (movieSchedule) {
+      movieSchedule.heThongRapChieu?.every((rapChieu) => {
+        if (rapChieu.maHeThongRap === pickCinemaBrand) {
+          today = new Date(
+            rapChieu.cumRapChieu[0].lichChieuPhim[0].ngayChieuGioChieu.split(
+              "T"
+            )[0]
+          );
+          return false;
+        } else {
+          today = new Date(
+            movieSchedule.heThongRapChieu[0].cumRapChieu[0].lichChieuPhim[0].ngayChieuGioChieu.split(
+              "T"
+            )[0]
+          );
+          return true;
+        }
+      });
+    }
+    if (!!today) {
+      tmpArr.push(today.toISOString().split("T")[0]);
+      for (let index = 1; index <= count; index++) {
+        let tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + index);
+        tmpArr.push(tomorrow.toISOString().split("T")[0]);
+      }
+    }
+    setDateArr(tmpArr);
+  };
+
+  const handleFormatDate = (date) => {
+    if (date === 1) {
+      return "Thứ 2";
+    } else if (date === 0) {
+      return "Chủ Nhật";
+    } else {
+      return "Thứ " + (date + 1);
+    }
+  };
   if (loading) {
     return <LoadingPage />;
   } else {
@@ -98,10 +201,11 @@ export default function MovieDetail(props) {
               </p>
               <p>Mô tả: {movieDetail.moTa}</p>
               <p className="movie-time">
-                {movieDetail.lichChieu && !movieTime
-                  ? setMovieTime(movieDetail.lichChieu[0].thoiLuong)
-                  : ""}
-                Thời lượng: {movieTime} phút
+                Thời lượng:{" "}
+                {movieDetail.lichChieu
+                  ? movieDetail.lichChieu[0].thoiLuong
+                  : ""}{" "}
+                phút
               </p>
 
               <Button
@@ -141,7 +245,13 @@ export default function MovieDetail(props) {
               </Modal>
 
               <Button variant="success" className="btn-bookMovie ">
-                Đặt vé
+                <a
+                  className="booking-session-link"
+                  style={{ textDecoration: "none", color: "white" }}
+                  href="#movie-shedule"
+                >
+                  Đặt vé
+                </a>
               </Button>
             </div>
             <div className="movie-rating col-2">
@@ -174,7 +284,7 @@ export default function MovieDetail(props) {
             </div>
           </div>
         </div>
-        <div className="movie-schedule row">
+        <div id="movie-shedule" className="movie-schedule row">
           <div className="col-4 brand-container">
             {listBrand.map((brand, index) => (
               <div
@@ -188,63 +298,111 @@ export default function MovieDetail(props) {
                 }}
               >
                 <img src={brand[0].logo} className="brand-img" alt="" />
-                <div>{brand[0].tenHeThongRap}</div>
+                <div className="brand-name">{brand[0].tenHeThongRap}</div>
               </div>
             ))}
           </div>
-
           <div className="col-8 brand-content">
-            {movieSchedule.heThongRapChieu?.map((rapChieu, index) => {
-              if (rapChieu.maHeThongRap === pickCinemaBrand) {
-                return rapChieu.cumRapChieu.map((rap) => (
-                  <div
-                    className=""
-                    key={rap.maCumRap}
-                    style={{ padding: "20px 20px 10px 20px" }}
-                  >
+            <div className="wrap-days-of-weeks">
+              <div className="days-of-week d-flex">
+                {dateArr.map((time) => {
+                  return (
                     <div
-                      className="d-flex align-items-center"
-                      style={{ paddingBottom: "20px" }}
+                      key={time}
+                      className={
+                        "day-in-week " +
+                        (time === pickDateToBook ? "active" : "")
+                      }
+                      onClick={() => {
+                        setPickDateToBook(time);
+                      }}
                     >
-                      <img
-                        src="https://s3img.vcdn.vn/123phim/2021/01/bhd-star-vincom-3-2-16105957596860.png"
-                        alt=""
-                        style={{ width: "70px", marginRight: "10px" }}
-                      />
-                      <div>
-                        <span style={{ fontSize: "16px", display: "block" }}>
-                          {rap.tenCumRap}
-                        </span>
-                        {listAddresses.map((address) => {
-                          if (address.maCumRap === rap.maCumRap) {
-                            return (
-                              <span
-                                key={address.diaChi}
-                                style={{ fontSize: "16px", display: "block" }}
-                              >
-                                {address.diaChi}
-                              </span>
-                            );
-                          }
-                        })}
-                      </div>
+                      <p className="day">
+                        {" "}
+                        {handleFormatDate(new Date(time).getDay())}
+                      </p>
+                      <p className="date">{new Date(time).getDate()}</p>
                     </div>
-                    <div className="d-flex flex-wrap cinema-time ">
-                      {rap.lichChieuPhim.map((lichChieu) => {
-                        return (
-                          <div
-                            key={lichChieu.maLichChieu}
-                            className="pill-time"
-                          >
-                            {lichChieu.ngayChieuGioChieu.split("T")[1]}
+                  );
+                })}
+              </div>
+            </div>
+            <div className="wrap-time-session">
+              {listBrandAvailable.includes(pickCinemaBrand) &&
+              listTimeAvailable.includes(pickDateToBook) ? (
+                <React.Fragment>
+                  {listCinemaAvailable?.map((rap) => {
+                    return (
+                      <div
+                        className="cinema-info"
+                        key={rap?.maCumRap}
+                        style={{ padding: "20px 20px 10px 20px" }}
+                      >
+                        <div
+                          className="d-flex align-items-center movie-address"
+                          style={{ paddingBottom: "20px" }}
+                        >
+                          <img
+                            src="https://s3img.vcdn.vn/123phim/2021/01/bhd-star-vincom-3-2-16105957596860.png"
+                            alt=""
+                            style={{ width: "70px", marginRight: "10px" }}
+                          />
+                          <div className="wrap-info">
+                            <span
+                              style={{
+                                fontSize: "16px",
+                                display: "block",
+                              }}
+                            >
+                              {rap?.tenCumRap}
+                            </span>
+                            {listAddresses.map((address) => {
+                              if (address.maCumRap === rap.maCumRap) {
+                                return (
+                                  <span
+                                    key={address.diaChi}
+                                    style={{
+                                      fontSize: "16px",
+                                      display: "block",
+                                    }}
+                                  >
+                                    {address.diaChi}
+                                  </span>
+                                );
+                              } else {
+                                return null;
+                              }
+                            })}
                           </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ));
-              }
-            })}
+                        </div>
+                        <div className="d-flex flex-wrap cinema-time ">
+                          {rap.lichChieuPhim.map((lichChieu) => {
+                            if (
+                              lichChieu.ngayChieuGioChieu.split("T")[0] ===
+                              pickDateToBook
+                            ) {
+                              return (
+                                <Link
+                                  key={lichChieu.maLichChieu}
+                                  className="pill-time"
+                                  to={`/bookingTickets/${props.match.params.movieId}/${lichChieu.maLichChieu}`}
+                                >
+                                  {lichChieu.ngayChieuGioChieu.split("T")[1]}
+                                </Link>
+                              );
+                            } else {
+                              return null;
+                            }
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </React.Fragment>
+              ) : (
+                <div style={{ textAlign: "center" }}>Không có xuất chiếu</div>
+              )}
+            </div>
           </div>
         </div>
       </div>

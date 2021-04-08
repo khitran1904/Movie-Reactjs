@@ -329,9 +329,6 @@ export default function Home() {
                             Mua Vé
                           </button>
                         </Link>
-                        <Link to={`/bookingTickets/${movie.maPhim}/40256`}>
-                          <button className="btn__buyTicket btn btn-success">Trang chọn ghế</button>
-                        </Link>
                       </div>
                     </div>
                   );
