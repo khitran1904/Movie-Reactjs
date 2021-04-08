@@ -20,7 +20,17 @@ function App() {
     <BrowserRouter>
       <ScrollToTop>
         <Switch>
-          <Route exact path={["/", "/movie/:movieId", "/checkout","/bookingTickets/:movieId/:calendarID","/login", "/signup"]}>
+          <Route
+            exact
+            path={[
+              "/",
+              "/movie/:movieId",
+              "/checkout",
+              "/bookingTickets/:movieId/:calendarID",
+              "/login",
+              "/signup",
+            ]}
+          >
             <MainLayout>
               <Switch>
                 <Route exact path="/" component={Home} />
@@ -28,15 +38,17 @@ function App() {
                 <Route exact path="/checkout" component={Checkout} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
-                <Route exact path="/bookingTickets/:movieId/:calendarID" component={BookTickets}/>
+                <Route
+                  exact
+                  path="/bookingTickets/:movieId/:calendarID"
+                  component={BookTickets}
+                />
               </Switch>
             </MainLayout>
           </Route>
           <Route>
             <AuthLayout exact path={[]}>
-              <Switch>
-                
-              </Switch>
+              <Switch></Switch>
             </AuthLayout>
           </Route>
           <Route>

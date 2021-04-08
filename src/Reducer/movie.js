@@ -11,6 +11,7 @@ import {
   GET_MOVIE_DETAIL_SUCCESS,
   GET_MOVIE_DETAIL_SCHEDULE_SUCCESS,
   GET_MOVIE_DETAIL_SCHEDULE_FAILED,
+  RESET_MOVIE_DETAIL_SCHEDULE,
 } from "../Constants/Movie";
 
 const initialState = {
@@ -51,6 +52,8 @@ const movieReducer = (state = initialState, action) => {
       return { ...state, movieSchedule: action.payload.data };
     case GET_MOVIE_DETAIL_SCHEDULE_FAILED:
       return { ...state, error: action.payload.error };
+    case RESET_MOVIE_DETAIL_SCHEDULE:
+      return { ...state, movieSchedule: {} };
     default:
       return state;
   }
