@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 //components
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import Checkout from "./Pages/Checkout";
 import MovieDetail from "./Pages/MovieDetail";
 import Signup from "./Pages/Signup";
 import BookTickets from "./Pages/BookTickets";
@@ -25,8 +24,7 @@ function App() {
             path={[
               "/",
               "/movie/:movieId",
-              "/checkout",
-              "/bookingTickets/:movieId/:calendarID",
+              "/bookingTickets/:calendarID",
               "/login",
               "/signup",
             ]}
@@ -35,12 +33,11 @@ function App() {
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/movie/:movieId" component={MovieDetail} />
-                <Route exact path="/checkout" component={Checkout} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={Signup} />
                 <Route
                   exact
-                  path="/bookingTickets/:movieId/:calendarID"
+                  path="/bookingTickets/:calendarID"
                   component={BookTickets}
                 />
               </Switch>

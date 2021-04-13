@@ -385,7 +385,7 @@ export default function MovieDetail(props) {
                                 <Link
                                   key={lichChieu.maLichChieu}
                                   className="pill-time"
-                                  to={`/bookingTickets/${props.match.params.movieId}/${lichChieu.maLichChieu}`}
+                                  to={`/bookingTickets/${lichChieu.maLichChieu}`}
                                 >
                                   {lichChieu.ngayChieuGioChieu.split("T")[1]}
                                 </Link>
