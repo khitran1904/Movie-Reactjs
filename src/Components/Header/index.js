@@ -39,7 +39,7 @@ export default function Header() {
       ) : (
         <div className="d-flex user__action">
           <span className="btn header__btn">
-            <i className="fa fa-user-tie"></i> &ensp; {taiKhoan}
+          <Link to="/account" className="account__name" > <i className="fa fa-user-tie"></i> &ensp; {taiKhoan}</Link>
           </span>
         </div>
       )}

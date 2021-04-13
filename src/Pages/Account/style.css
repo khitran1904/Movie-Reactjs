@@ -1,0 +1,108 @@
+.account{
+    width: 70%;
+    margin-left: 15%;
+}
+
+.account__left{
+    text-align: center;
+    color: #e71a0f;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.account__left ul{
+    font-size: 17px;
+    line-height: 30px;
+    list-style: none;
+}
+.account__left li{
+    background:  #eb5b54;
+    padding-left: 18px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+.account__left li a{
+    text-decoration: none;
+    color: #fff;
+}
+
+
+.account__right .title__right{
+    background-color: black;
+    color: aliceblue;
+    text-align: center;
+    font-size: 25px;
+}
+
+.account__right img{
+    width:120px;
+    height: 120px;
+    border-radius: 80px;
+    border: 1px solid black;
+    margin-right: 20px;
+}
+
+.account__right .account__name{
+    font-size: 20px;
+    color: black;
+}
+
+.account__right ul  {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.col__title{
+    display: inline-block;
+    width: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 24px;
+    color: #333;
+}
+.col__value{
+    display: inline-block;
+    width: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 24px;
+    color: #333;
+    margin-left: 10px;
+}
+
+.modify-user{
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: #f18720;
+    text-transform: uppercase;
+    line-height: 30px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    display: inline-block;
+    margin: 10px auto;
+}
+
+.modify-user:hover{
+    text-decoration: none;
+    color: white;
+    background-color:  #f2b819;
+}
+
+.input-group-text{
+    width: 100px;
+}
+
+.modal__change{
+    text-align: center;
+    width: 45%;
+    margin-left: 27%;
+}

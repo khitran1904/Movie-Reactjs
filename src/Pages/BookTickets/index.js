@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from 'react'
 import "./style.css";
@@ -18,7 +19,7 @@ export default function BookTickets(props) {
         return state.movieReducer;
     });
     const { listSeat, thongTinPhim } = useSelector((state) => state.ListSeatReducer);
-    const { ticket, error } = useSelector((state) => state.BookingTicketsReducer);
+    const [listSeatState, setListSeatState] = useState(listSeat)
 
     const [listPickedSeat, setListPickedSeat] = useState([]);
     const [price, setPrice] = useState(0)
@@ -48,6 +49,7 @@ export default function BookTickets(props) {
                 "taiKhoanNguoiDung": taiKhoan
             };
             dispatch(bookingTicket(values));
+            dispatch(getListSeat(props.match.params.calendarID))
             callback();
         }
     }

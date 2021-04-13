@@ -1,0 +1,75 @@
+.account{
+    width: 70%;
+    margin-left: 15%;
+}
+
+.account__left{
+    text-align: center;
+    color: #e71a0f;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.account__left ul{
+    font-size: 17px;
+    line-height: 30px;
+    list-style: none;
+}
+.account__left li{
+    background:  #eb5b54;
+    padding-left: 18px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+.account__left li a{
+    text-decoration: none;
+    color: #fff;
+}
+
+
+.account__right .title__right{
+    background-color: black;
+    color: aliceblue;
+    text-align: center;
+    font-size: 25px;
+}
+
+.account__right table{
+    border-spacing: 1px;
+    margin: 0 0 30px 0;
+}
+
+.account__right table th{
+    color: #fff;
+    font-weight: bold;
+    background-color: #969696;
+    text-transform: uppercase;
+    font-size: 12px;
+    white-space: nowrap;
+    padding: 10px;
+    text-align: center;
+    line-height: 20px;
+    background-color: #f18720;
+    vertical-align: middle;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid white;
+}
+
+.account__right table td{
+    color: #fff;
+    font-weight: bold;
+    background-color: #969696;
+    text-transform: uppercase;
+    font-size: 12px;
+    white-space: nowrap;
+    padding: 10px;
+    text-align: center;
+    line-height: 20px;
+    /* background-color: #f18720; */
+    vertical-align: middle;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid white;
+}
