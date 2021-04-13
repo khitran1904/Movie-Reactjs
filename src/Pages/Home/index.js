@@ -38,9 +38,7 @@ export default function Home() {
     let trailer1 = trailer.toString().replace("/watch?v=", "/embed/");
     setModalUrl(trailer1);
     setShow(true);
-  }
-
-
+  };
 
   useEffect(() => {
     if (isMounted.current) {
@@ -218,8 +216,8 @@ export default function Home() {
               <select name="time" onChange={handleChange}>
                 <option value="">Chọn suất chiếu</option>
                 {selectMovieToBook.movie &&
-                  selectMovieToBook.theater &&
-                  selectMovieToBook.date ? (
+                selectMovieToBook.theater &&
+                selectMovieToBook.date ? (
                   handleRenderTimeOption()
                 ) : (
                   <option>Vui lòng chọn ngày xem</option>
@@ -231,9 +229,9 @@ export default function Home() {
           <button
             disabled={
               selectMovieToBook.movie &&
-                selectMovieToBook.theater &&
-                selectMovieToBook.date &&
-                selectMovieToBook.time
+              selectMovieToBook.theater &&
+              selectMovieToBook.date &&
+              selectMovieToBook.time
                 ? false
                 : true
             }
@@ -331,9 +329,6 @@ export default function Home() {
                             Mua Vé
                           </button>
                         </Link>
-                        <Link to={`/bookingTickets/${movie.maPhim}/40256`}>
-                          <button className="btn__buyTicket btn btn-success">Trang chọn ghế</button>
-                        </Link>
                       </div>
                     </div>
                   );
@@ -352,11 +347,25 @@ export default function Home() {
               >
                 {movieListUpcoming.map((movie) => {
                   return (
-                    <div key={movie.maPhim} className=" text-left col-md-3 col-sm-4 my-2 " >
+                    <div
+                      key={movie.maPhim}
+                      className=" text-left col-md-3 col-sm-4 my-2 "
+                    >
                       <div className="div__image">
-                        <img className="item__image" width="205px" height="300px" src={movie.hinhAnh} alt="Hình ảnh" />
+                        <img
+                          className="item__image"
+                          width="205px"
+                          height="300px"
+                          src={movie.hinhAnh}
+                          alt="Hình ảnh"
+                        />
                         <div className="image__overlay">
-                          <i className="fa fa-play-circle" onClick={() => {handleShow(movie.trailer)}}></i>
+                          <i
+                            className="fa fa-play-circle"
+                            onClick={() => {
+                              handleShow(movie.trailer);
+                            }}
+                          ></i>
                         </div>
                       </div>
                       <div className="">
@@ -496,16 +505,20 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Modal className="modal" show={show} onHide={handleClose} >
+      <Modal className="modal" show={show} onHide={handleClose}>
         <Modal.Body className=" modal__body">
-        <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
-          <iframe frameBorder={0} allow="autoplay; fullscreen" allowFullScreen 
-                  className="video__trailer" src={modalUrl} title="{movie.tenPhim}" />
-                </div>
+          <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
+            <iframe
+              frameBorder={0}
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              className="video__trailer"
+              src={modalUrl}
+              title="{movie.tenPhim}"
+            />
+          </div>
         </Modal.Body>
       </Modal>
-
     </div>
-
   );
 }

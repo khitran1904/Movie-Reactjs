@@ -32,15 +32,17 @@ function App() {
                 <Route exact path="/account" component={Account} />
                 <Route exact path="/ticketInfo" component={TicketInfo} />
                 <Route exact path="/signup" component={Signup} />
-                <Route exact path="/bookingTickets/:movieId/:calendarID" component={BookTickets}/>
+                <Route
+                  exact
+                  path="/bookingTickets/:movieId/:calendarID"
+                  component={BookTickets}
+                />
               </Switch>
             </MainLayout>
           </Route>
           <Route>
             <AuthLayout exact path={[]}>
-              <Switch>
-                
-              </Switch>
+              <Switch></Switch>
             </AuthLayout>
           </Route>
           <Route>

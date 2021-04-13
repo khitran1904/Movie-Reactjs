@@ -24,5 +24,7 @@
         "p",
         "y",
         "động"
-    ]
+    ],
+    "scm.inputFontFamily": "Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": null,
 }
