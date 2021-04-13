@@ -5,6 +5,7 @@ import theaterReducer from "./Theater";
 import SignUpReducer from "./SignUp";
 import BookingTicketsReducer from "./BookingTickets";
 import ListSeatReducer from "./ListSeat";
+import accountReducer from "./Account";
 
 const rootReducer = combineReducers({
   movieReducer,
@@ -13,7 +14,7 @@ const rootReducer = combineReducers({
   SignUpReducer,
   BookingTicketsReducer,
   ListSeatReducer,
-
+  accountReducer
 });
 
 export default rootReducer;

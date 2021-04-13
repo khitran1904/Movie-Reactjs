@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,14 +15,21 @@ export default function BookTickets(props) {
   );
   const { ticket, error } = useSelector((state) => state.BookingTicketsReducer);
 
-  const [listPickedSeat, setListPickedSeat] = useState([]);
-  const [price, setPrice] = useState(0);
+    const [listSeatState, setListSeatState] = useState(listSeat)
+
+    const [listPickedSeat, setListPickedSeat] = useState([]);
+    const [price, setPrice] = useState(0)
+
+    useEffect(() => {
+        dispatch(getMovieDetailAction(props.match.params.movieId));
+        dispatch(getListSeat(props.match.params.calendarID))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
   useEffect(() => {
     dispatch(getListSeat(props.match.params.calendarID));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const pickUp = (callback) => {
     if (listPickedSeat.length === 0) {
       alert("Vui lòng chọn vé !");
@@ -172,4 +180,5 @@ export default function BookTickets(props) {
       </div>
     </div>
   );
+}
 }

@@ -6,6 +6,8 @@ import Login from "./Pages/Login";
 import MovieDetail from "./Pages/MovieDetail";
 import Signup from "./Pages/Signup";
 import BookTickets from "./Pages/BookTickets";
+import Account from "./Pages/Account";
+import TicketInfo from "./Pages/TicketInfo";
 
 //Layout
 import MainLayout from "./Layout/MainLayout";
@@ -34,6 +36,8 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/movie/:movieId" component={MovieDetail} />
                 <Route exact path="/login" component={Login} />
+                <Route exact path="/account" component={Account} />
+                <Route exact path="/ticketInfo" component={TicketInfo} />
                 <Route exact path="/signup" component={Signup} />
                 <Route
                   exact
