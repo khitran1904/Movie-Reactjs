@@ -15,16 +15,16 @@ export default function BookTickets(props) {
   );
   const { ticket, error } = useSelector((state) => state.BookingTicketsReducer);
 
-    const [listSeatState, setListSeatState] = useState(listSeat)
+  const [listSeatState, setListSeatState] = useState(listSeat);
 
-    const [listPickedSeat, setListPickedSeat] = useState([]);
-    const [price, setPrice] = useState(0)
+  const [listPickedSeat, setListPickedSeat] = useState([]);
+  const [price, setPrice] = useState(0);
 
-    useEffect(() => {
-        dispatch(getMovieDetailAction(props.match.params.movieId));
-        dispatch(getListSeat(props.match.params.calendarID))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  useEffect(() => {
+    // dispatch(getMovieDetailAction(props.match.params.movieId));
+    dispatch(getListSeat(props.match.params.calendarID));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     dispatch(getListSeat(props.match.params.calendarID));
@@ -180,5 +180,4 @@ export default function BookTickets(props) {
       </div>
     </div>
   );
-}
 }
