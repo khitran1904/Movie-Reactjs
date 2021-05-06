@@ -29,6 +29,7 @@ function App() {
               "/bookingTickets/:calendarID",
               "/login",
               "/signup",
+              "/account",
             ]}
           >
             <MainLayout>
